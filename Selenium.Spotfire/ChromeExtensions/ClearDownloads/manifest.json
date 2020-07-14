@@ -1,0 +1,14 @@
+﻿{
+  "background": {
+    "persistent": false,
+    "scripts": [ "ClearDownloads.js" ]
+  },
+  "description": "A Google Chrome Extension to clear the downloads list of all completed downloads.",
+  "manifest_version": 2,
+  "name": "Clear Downloads",
+  "permissions": [
+    "downloads",
+    "downloads.shelf"
+  ],
+  "version": "1.0.0"
+}

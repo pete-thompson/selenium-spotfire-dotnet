@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F2AB23D7-95A7-4155-BCE1-E82B718C5B24}"
+	ProjectSection(SolutionItems) = preProject
+		.gitlab-ci.yml = .gitlab-ci.yml
+		License.md = License.md
+		nuget.config = nuget.config
+		Readme.md = Readme.md
+		Standard.runSettings = Standard.runSettings
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.Spotfire", "Selenium.Spotfire\Selenium.Spotfire.csproj", "{10356D74-A2AE-4A56-BC91-3D22A14E541C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.Spotfire.TestHelpers", "Selenium.Spotfire.TestHelpers\Selenium.Spotfire.TestHelpers.csproj", "{BE6AB65A-2042-44A1-9B3F-769304976C4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.Spotfire.MSTest", "Selenium.Spotfire.MSTest\Selenium.Spotfire.MSTest.csproj", "{F480F484-AB70-44C5-BCD8-368D4DBB70B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.Spotfire.MSTest.Tests", "Selenium.Spotfire.MSTest.Tests\Selenium.Spotfire.MSTest.Tests.csproj", "{9F5CA862-1ABF-492E-A351-BA74AA358F71}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.Spotfire.Tests", "Selenium.Spotfire.Tests\Selenium.Spotfire.Tests.csproj", "{224AC825-7B91-429C-89AF-44412B08C3F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.Spotfire.TestHelpers.Tests", "Selenium.Spotfire.TestHelpers.Tests\Selenium.Spotfire.TestHelpers.Tests.csproj", "{F1E550D6-49E4-491B-97F3-5390932846E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10356D74-A2AE-4A56-BC91-3D22A14E541C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10356D74-A2AE-4A56-BC91-3D22A14E541C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10356D74-A2AE-4A56-BC91-3D22A14E541C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10356D74-A2AE-4A56-BC91-3D22A14E541C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE6AB65A-2042-44A1-9B3F-769304976C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6AB65A-2042-44A1-9B3F-769304976C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE6AB65A-2042-44A1-9B3F-769304976C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6AB65A-2042-44A1-9B3F-769304976C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F480F484-AB70-44C5-BCD8-368D4DBB70B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F480F484-AB70-44C5-BCD8-368D4DBB70B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F480F484-AB70-44C5-BCD8-368D4DBB70B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F480F484-AB70-44C5-BCD8-368D4DBB70B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F5CA862-1ABF-492E-A351-BA74AA358F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F5CA862-1ABF-492E-A351-BA74AA358F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F5CA862-1ABF-492E-A351-BA74AA358F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F5CA862-1ABF-492E-A351-BA74AA358F71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{224AC825-7B91-429C-89AF-44412B08C3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{224AC825-7B91-429C-89AF-44412B08C3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{224AC825-7B91-429C-89AF-44412B08C3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{224AC825-7B91-429C-89AF-44412B08C3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E550D6-49E4-491B-97F3-5390932846E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E550D6-49E4-491B-97F3-5390932846E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E550D6-49E4-491B-97F3-5390932846E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E550D6-49E4-491B-97F3-5390932846E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5214AAD6-158F-41B2-AEE4-C39B964A3FB6}
+	EndGlobalSection
+EndGlobal

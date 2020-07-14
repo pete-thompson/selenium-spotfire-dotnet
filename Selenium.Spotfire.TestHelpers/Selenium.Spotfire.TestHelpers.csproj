@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <VersionPrefix>1.2.1</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>1.0.0 - Initial public release</PackageReleaseNotes>
+    <Description>Helpers for all types of tests using Spotfire and Selenium, part of the Spotfire.Selenium project.</Description>
+    <Company>IQVIA</Company>
+    <Product>Selenium.Spotfire</Product>
+    <Copyright>Copyright © IQVIA 2019</Copyright>
+    <PackageProjectUrl>https://github.com/pete-thompson/selenium-spotfire-dotnet</PackageProjectUrl>
+    <Authors>Pete Thompson</Authors>
+    <PackageTags>Selenium Spotfire</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Selenium.Spotfire\Selenium.Spotfire.csproj" />
+  </ItemGroup>
+
+</Project>

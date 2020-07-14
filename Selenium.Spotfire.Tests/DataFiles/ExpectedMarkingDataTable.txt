@@ -1,0 +1,218 @@
+﻿1960 (thousand)	2017 (thousand)	Country
+8996.35	35530.08	Afghanistan
+1608.80	2873.46	Albania
+11124.89	41318.14	Algeria
+20.01	55.64	American Samoa
+13.41	76.97	Andorra
+5643.18	29784.19	Angola
+55.34	102.01	Antigua and Barbuda
+20619.08	44271.04	Argentina
+1874.12	2930.45	Armenia
+54.21	105.26	Aruba
+10276.48	24598.93	Australia
+7047.54	8809.21	Austria
+3895.40	9862.43	Azerbaijan
+109.53	395.36	Bahamas, The
+162.43	1492.58	Bahrain
+48199.75	164669.75	Bangladesh
+230.94	285.72	Barbados
+8198.00	9507.88	Belarus
+9153.49	11372.07	Belgium
+92.06	374.68	Belize
+2431.62	11175.69	Benin
+44.40	65.44	Bermuda
+223.29	807.61	Bhutan
+3693.45	11051.60	Bolivia
+3225.67	3507.02	Bosnia and Herzegovina
+524.55	2291.66	Botswana
+72207.55	209288.28	Brazil
+8.03	31.20	British Virgin Islands
+81.75	428.70	Brunei Darussalam
+7867.37	7075.99	Bulgaria
+4829.29	19193.38	Burkina Faso
+2786.11	10864.25	Burundi
+202.31	546.39	Cabo Verde
+5722.37	16005.37	Cambodia
+5176.27	24053.73	Cameroon
+17909.01	36708.08	Canada
+7.87	61.56	Cayman Islands
+1503.51	4659.08	Central African Republic
+3001.59	14899.99	Chad
+109.42	165.31	Channel Islands
+7716.63	18054.73	Chile
+667070.00	1386395.00	China
+16480.38	49065.61	Colombia
+191.12	813.91	Comoros
+15248.25	81339.99	Congo, Dem. Rep.
+1037.22	5260.75	Congo, Rep.
+1333.04	4905.77	Costa Rica
+3558.99	24294.75	Cote d'Ivoire
+4140.00	4125.70	Croatia
+7141.14	11484.64	Cuba
+124.83	161.01	Curacao
+572.93	1179.55	Cyprus
+9602.01	10591.32	Czech Republic
+4579.60	5769.60	Denmark
+83.64	956.99	Djibouti
+60.01	73.92	Dominica
+3294.04	10767.00	Dominican Republic
+4545.55	16624.86	Ecuador
+26996.53	97553.15	Egypt, Arab Rep.
+2762.90	6377.85	El Salvador
+255.32	1267.69	Equatorial Guinea
+1397.49	(Empty)	Eritrea
+1211.54	1315.48	Estonia
+349.17	1367.25	Eswatini
+22151.28	104957.44	Ethiopia
+34.66	49.29	Faroe Islands
+393.39	905.50	Fiji
+4429.63	5511.30	Finland
+46814.24	67118.65	France
+78.08	283.01	French Polynesia
+499.18	2025.14	Gabon
+367.93	2100.57	Gambia, The
+3645.60	3717.10	Georgia
+72814.90	82695.00	Germany
+6652.29	28833.63	Ghana
+23.39	34.57	Gibraltar
+8331.73	10760.42	Greece
+32.50	56.17	Greenland
+89.87	107.83	Grenada
+66.74	164.23	Guam
+4210.75	16913.50	Guatemala
+3577.41	12717.18	Guinea
+616.41	1861.28	Guinea-Bissau
+571.82	777.86	Guyana
+3866.16	10981.23	Haiti
+2038.64	9265.07	Honduras
+3075.61	7391.70	Hong Kong SAR, China
+9983.97	9781.13	Hungary
+175.57	341.28	Iceland
+449480.61	1339180.13	India
+87792.51	263991.38	Indonesia
+21906.90	81162.79	Iran, Islamic Rep.
+7289.76	38274.62	Iraq
+2828.60	4813.61	Ireland
+48.44	84.29	Isle of Man
+2114.02	8712.40	Israel
+50199.70	60551.42	Italy
+1628.25	2890.30	Jamaica
+92500.57	126785.80	Japan
+932.26	9702.35	Jordan
+9714.26	18037.65	Kazakhstan
+8105.44	49699.86	Kenya
+41.23	116.40	Kiribati
+11424.18	25490.97	Korea, Dem. People’s Rep.
+25012.37	51466.20	Korea, Rep.
+947.00	1830.70	Kosovo
+269.62	4136.53	Kuwait
+2172.30	6201.50	Kyrgyz Republic
+2120.90	6858.16	Lao PDR
+2120.98	1940.74	Latvia
+1804.93	6082.36	Lebanon
+851.59	2233.34	Lesotho
+1120.31	4731.91	Liberia
+1448.42	6374.62	Libya
+16.50	37.92	Liechtenstein
+2778.55	2827.72	Lithuania
+313.97	599.45	Luxembourg
+167.80	622.57	Macao SAR, China
+1488.67	2083.16	Macedonia, FYR
+5099.37	25570.90	Madagascar
+3618.59	18622.10	Malawi
+8157.11	31624.26	Malaysia
+89.89	436.33	Maldives
+5263.73	18541.98	Mali
+326.55	465.29	Malta
+14.66	53.13	Marshall Islands
+858.17	4420.18	Mauritania
+659.35	1264.61	Mauritius
+38174.11	129163.28	Mexico
+44.54	105.54	Micronesia, Fed. Sts.
+2544.00	3549.75	Moldova
+22.45	38.70	Monaco
+955.50	3075.65	Mongolia
+480.58	622.47	Montenegro
+12328.53	35739.58	Morocco
+7388.69	29668.83	Mozambique
+20986.12	53370.61	Myanmar
+602.54	2533.79	Namibia
+4.43	13.65	Nauru
+10063.01	29305.00	Nepal
+11486.63	17132.85	Netherlands
+79.00	280.46	New Caledonia
+2371.80	4793.90	New Zealand
+1774.70	6217.58	Nicaragua
+3388.76	21477.35	Niger
+45137.81	190886.31	Nigeria
+10.04	55.14	Northern Mariana Islands
+3581.24	5282.22	Norway
+551.74	4636.26	Oman
+44908.29	197015.95	Pakistan
+9.64	21.73	Palau
+1132.92	4098.59	Panama
+2010.68	8251.16	Papua New Guinea
+1902.88	6811.30	Paraguay
+10061.51	32165.49	Peru
+26273.03	104918.09	Philippines
+29637.45	37975.84	Poland
+8857.72	10293.72	Portugal
+2358.00	3337.18	Puerto Rico
+47.38	2639.21	Qatar
+18406.90	19586.54	Romania
+119897.00	144495.04	Russian Federation
+2933.43	12208.41	Rwanda
+108.65	196.44	Samoa
+15.40	33.40	San Marino
+64.25	204.33	Sao Tome and Principe
+4086.54	32938.21	Saudi Arabia
+3206.75	15850.57	Senegal
+(Empty)	7022.27	Serbia
+41.70	95.84	Seychelles
+2297.11	7557.21	Sierra Leone
+1646.40	5612.25	Singapore
+(Empty)	41.11	Sint Maarten (Dutch part)
+4068.09	5439.89	Slovak Republic
+1584.72	2066.75	Slovenia
+117.87	611.34	Solomon Islands
+2755.95	14742.52	Somalia
+17456.85	56717.16	South Africa
+2955.15	12575.71	South Sudan
+30455.00	46572.03	Spain
+9874.48	21444.00	Sri Lanka
+51.20	55.34	St. Kitts and Nevis
+89.90	178.84	St. Lucia
+4.28	32.13	St. Martin (French part)
+80.95	109.90	St. Vincent and the Grenadines
+7544.49	40533.33	Sudan
+289.97	563.40	Suriname
+7484.66	10067.74	Sweden
+5327.83	8466.02	Switzerland
+4573.51	18269.87	Syrian Arab Republic
+2087.04	8921.34	Tajikistan
+10074.51	57310.02	Tanzania
+27397.17	69037.51	Thailand
+499.95	1296.31	Timor-Leste
+1580.51	7797.69	Togo
+61.60	108.02	Tonga
+848.48	1369.13	Trinidad and Tobago
+4176.27	11532.13	Tunisia
+27472.33	80745.02	Turkey
+1603.26	5758.07	Turkmenistan
+5.73	35.45	Turks and Caicos Islands
+6.10	11.19	Tuvalu
+6788.21	42862.96	Uganda
+42662.15	44831.16	Ukraine
+92.63	9400.15	United Arab Emirates
+52400.00	66022.27	United Kingdom
+180671.00	325719.18	United States
+2538.65	3456.75	Uruguay
+8549.49	32387.20	Uzbekistan
+63.70	276.24	Vanuatu
+8146.85	31977.06	Venezuela, RB
+32670.63	95540.80	Vietnam
+32.50	107.27	Virgin Islands (U.S.)
+(Empty)	4684.78	West Bank and Gaza
+5172.14	28250.42	Yemen, Rep.
+3044.85	17094.13	Zambia
+3747.37	16529.90	Zimbabwe

@@ -1,0 +1,7 @@
+{
+    "omnisharp" : {
+        "testRunSettings": "./standard.runSettings"
+    },
+    "dotnet-test-explorer.testArguments": "--settings:./standard.runSettings",
+//    "dotnet-test-explorer.settingsFile": "./standard.runSettings",
+}

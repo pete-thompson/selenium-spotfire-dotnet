@@ -1,0 +1,234 @@
+﻿Continent	Country	Region	Subregion
+North America	Aruba	Americas	Caribbean
+Asia	Afghanistan	Asia	Southern Asia
+Africa	Angola	Africa	Middle Africa
+North America	Anguilla	Americas	Caribbean
+Europe	Albania	Europe	Southern Europe
+Europe	Aland	Europe	Northern Europe
+Europe	Andorra	Europe	Southern Europe
+Asia	United Arab Emirates	Asia	Western Asia
+South America	Argentina	Americas	South America
+Asia	Armenia	Asia	Western Asia
+Oceania	American Samoa	Oceania	Polynesia
+North America	Antigua and Barbuda	Americas	Caribbean
+Oceania	Australia	Oceania	Australia and New Zealand
+Europe	Austria	Europe	Western Europe
+Asia	Azerbaijan	Asia	Western Asia
+Africa	Burundi	Africa	Eastern Africa
+Europe	Belgium	Europe	Western Europe
+Africa	Benin	Africa	Western Africa
+Africa	Burkina Faso	Africa	Western Africa
+Asia	Bangladesh	Asia	Southern Asia
+Europe	Bulgaria	Europe	Eastern Europe
+Asia	Bahrain	Asia	Western Asia
+North America	The Bahamas	Americas	Caribbean
+Europe	Bosnia and Herzegovina	Europe	Southern Europe
+North America	Saint Barthelemy	Americas	Caribbean
+Europe	Belarus	Europe	Eastern Europe
+North America	Belize	Americas	Central America
+North America	Bermuda	Americas	Northern America
+South America	Bolivia	Americas	South America
+South America	Brazil	Americas	South America
+North America	Barbados	Americas	Caribbean
+Asia	Brunei	Asia	South-Eastern Asia
+Asia	Bhutan	Asia	Southern Asia
+Africa	Botswana	Africa	Southern Africa
+Africa	Central African Republic	Africa	Middle Africa
+North America	Canada	Americas	Northern America
+Europe	Switzerland	Europe	Western Europe
+South America	Chile	Americas	South America
+Asia	China	Asia	Eastern Asia
+Africa	Ivory Coast	Africa	Western Africa
+Africa	Cameroon	Africa	Middle Africa
+Africa	Democratic Republic of the Congo	Africa	Middle Africa
+Africa	Republic of Congo	Africa	Middle Africa
+Oceania	Cook Islands	Oceania	Polynesia
+South America	Colombia	Americas	South America
+Africa	Comoros	Africa	Eastern Africa
+Africa	Cape Verde	Africa	Western Africa
+North America	Costa Rica	Americas	Central America
+North America	Cuba	Americas	Caribbean
+North America	Curaçao	Americas	Caribbean
+North America	Cayman Islands	Americas	Caribbean
+Europe	Czech Republic	Europe	Eastern Europe
+Europe	Germany	Europe	Western Europe
+Africa	Djibouti	Africa	Eastern Africa
+North America	Dominica	Americas	Caribbean
+Europe	Denmark	Europe	Northern Europe
+North America	Dominican Republic	Americas	Caribbean
+Africa	Algeria	Africa	Northern Africa
+South America	Ecuador	Americas	South America
+Africa	Egypt	Africa	Northern Africa
+Africa	Eritrea	Africa	Eastern Africa
+Europe	Spain	Europe	Southern Europe
+Europe	Estonia	Europe	Northern Europe
+Africa	Ethiopia	Africa	Eastern Africa
+Europe	Finland	Europe	Northern Europe
+Oceania	Fiji	Oceania	Melanesia
+South America	Falkland Islands	Americas	South America
+Europe	France	Europe	Western Europe
+Europe	Faroe Islands	Europe	Northern Europe
+Oceania	Federated States of Micronesia	Oceania	Micronesia
+Africa	Gabon	Africa	Middle Africa
+Europe	United Kingdom	Europe	Northern Europe
+Asia	Georgia	Asia	Western Asia
+Europe	Guernsey	Europe	Northern Europe
+Africa	Ghana	Africa	Western Africa
+Africa	Guinea	Africa	Western Africa
+Africa	Gambia	Africa	Western Africa
+Africa	Guinea Bissau	Africa	Western Africa
+Africa	Equatorial Guinea	Africa	Middle Africa
+Europe	Greece	Europe	Southern Europe
+North America	Grenada	Americas	Caribbean
+North America	Greenland	Americas	Northern America
+North America	Guatemala	Americas	Central America
+Oceania	Guam	Oceania	Micronesia
+South America	Guyana	Americas	South America
+Asia	Hong Kong S.A.R.	Asia	Eastern Asia
+North America	Honduras	Americas	Central America
+Europe	Croatia	Europe	Southern Europe
+North America	Haiti	Americas	Caribbean
+Europe	Hungary	Europe	Eastern Europe
+Asia	Indonesia	Asia	South-Eastern Asia
+Europe	Isle of Man	Europe	Northern Europe
+Asia	India	Asia	Southern Asia
+Asia	British Indian Ocean Territory	Seven seas (open ocean)	Seven seas (open ocean)
+Europe	Ireland	Europe	Northern Europe
+Asia	Iran	Asia	Southern Asia
+Asia	Iraq	Asia	Western Asia
+Europe	Iceland	Europe	Northern Europe
+Asia	Israel	Asia	Western Asia
+Europe	Italy	Europe	Southern Europe
+North America	Jamaica	Americas	Caribbean
+Europe	Jersey	Europe	Northern Europe
+Asia	Jordan	Asia	Western Asia
+Asia	Japan	Asia	Eastern Asia
+Asia	Siachen Glacier	Asia	Southern Asia
+Asia	Kazakhstan	Asia	Central Asia
+Africa	Kenya	Africa	Eastern Africa
+Asia	Kyrgyzstan	Asia	Central Asia
+Asia	Cambodia	Asia	South-Eastern Asia
+Oceania	Kiribati	Oceania	Micronesia
+North America	Saint Kitts and Nevis	Americas	Caribbean
+Asia	South Korea	Asia	Eastern Asia
+Europe	Kosovo	Europe	Southern Europe
+Asia	Kuwait	Asia	Western Asia
+Asia	Laos	Asia	South-Eastern Asia
+Asia	Lebanon	Asia	Western Asia
+Africa	Liberia	Africa	Western Africa
+Africa	Libya	Africa	Northern Africa
+North America	Saint Lucia	Americas	Caribbean
+Europe	Liechtenstein	Europe	Western Europe
+Asia	Sri Lanka	Asia	Southern Asia
+Africa	Lesotho	Africa	Southern Africa
+Europe	Lithuania	Europe	Northern Europe
+Europe	Luxembourg	Europe	Western Europe
+Europe	Latvia	Europe	Northern Europe
+Asia	Macao S.A.R	Asia	Eastern Asia
+North America	Saint Martin	Americas	Caribbean
+Africa	Morocco	Africa	Northern Africa
+Europe	Monaco	Europe	Western Europe
+Europe	Moldova	Europe	Eastern Europe
+Africa	Madagascar	Africa	Eastern Africa
+Asia	Maldives	Asia	Southern Asia
+North America	Mexico	Americas	Central America
+Oceania	Marshall Islands	Oceania	Micronesia
+Europe	Macedonia	Europe	Southern Europe
+Africa	Mali	Africa	Western Africa
+Europe	Malta	Europe	Southern Europe
+Asia	Myanmar	Asia	South-Eastern Asia
+Europe	Montenegro	Europe	Southern Europe
+Asia	Mongolia	Asia	Eastern Asia
+Oceania	Northern Mariana Islands	Oceania	Micronesia
+Africa	Mozambique	Africa	Eastern Africa
+Africa	Mauritania	Africa	Western Africa
+North America	Montserrat	Americas	Caribbean
+Africa	Mauritius	Africa	Eastern Africa
+Africa	Malawi	Africa	Eastern Africa
+Asia	Malaysia	Asia	South-Eastern Asia
+Africa	Namibia	Africa	Southern Africa
+Oceania	New Caledonia	Oceania	Melanesia
+Africa	Niger	Africa	Western Africa
+Oceania	Norfolk Island	Oceania	Australia and New Zealand
+Africa	Nigeria	Africa	Western Africa
+North America	Nicaragua	Americas	Central America
+Oceania	Niue	Oceania	Polynesia
+Europe	Netherlands	Europe	Western Europe
+Europe	Norway	Europe	Northern Europe
+Asia	Nepal	Asia	Southern Asia
+Oceania	Nauru	Oceania	Micronesia
+Oceania	New Zealand	Oceania	Australia and New Zealand
+Asia	Oman	Asia	Western Asia
+Asia	Pakistan	Asia	Southern Asia
+North America	Panama	Americas	Central America
+South America	Peru	Americas	South America
+Asia	Philippines	Asia	South-Eastern Asia
+Oceania	Palau	Oceania	Micronesia
+Oceania	Papua New Guinea	Oceania	Melanesia
+Europe	Poland	Europe	Eastern Europe
+North America	Puerto Rico	Americas	Caribbean
+Asia	North Korea	Asia	Eastern Asia
+Europe	Portugal	Europe	Southern Europe
+South America	Paraguay	Americas	South America
+Asia	West Bank	Asia	Western Asia
+Oceania	French Polynesia	Oceania	Polynesia
+Asia	Qatar	Asia	Western Asia
+Europe	Romania	Europe	Eastern Europe
+Europe	Russia	Europe	Eastern Europe
+Africa	Rwanda	Africa	Eastern Africa
+Africa	Western Sahara	Africa	Northern Africa
+Asia	Saudi Arabia	Asia	Western Asia
+Africa	Sudan	Africa	Northern Africa
+Africa	South Sudan	Africa	Eastern Africa
+Africa	Senegal	Africa	Western Africa
+Asia	Singapore	Asia	South-Eastern Asia
+Africa	Saint Helena	Africa	Western Africa
+Oceania	Solomon Islands	Oceania	Melanesia
+Africa	Sierra Leone	Africa	Western Africa
+North America	El Salvador	Americas	Central America
+Europe	San Marino	Europe	Southern Europe
+North America	Saint Pierre and Miquelon	Americas	Northern America
+Europe	Republic of Serbia	Europe	Southern Europe
+Africa	Sao Tome and Principe	Africa	Middle Africa
+South America	Suriname	Americas	South America
+Europe	Slovakia	Europe	Eastern Europe
+Europe	Slovenia	Europe	Southern Europe
+Europe	Sweden	Europe	Northern Europe
+Africa	Swaziland	Africa	Southern Africa
+North America	Sint Maarten	Americas	Caribbean
+Africa	Seychelles	Africa	Eastern Africa
+Asia	Syria	Asia	Western Asia
+North America	Turks and Caicos Islands	Americas	Caribbean
+Africa	Chad	Africa	Middle Africa
+Africa	Togo	Africa	Western Africa
+Asia	Thailand	Asia	South-Eastern Asia
+Asia	Tajikistan	Asia	Central Asia
+Asia	Turkmenistan	Asia	Central Asia
+Asia	East Timor	Asia	South-Eastern Asia
+Oceania	Tonga	Oceania	Polynesia
+North America	Trinidad and Tobago	Americas	Caribbean
+Africa	Tunisia	Africa	Northern Africa
+Asia	Turkey	Asia	Western Asia
+Asia	Taiwan	Asia	Eastern Asia
+Africa	United Republic of Tanzania	Africa	Eastern Africa
+Africa	Uganda	Africa	Eastern Africa
+Europe	Ukraine	Europe	Eastern Europe
+South America	Uruguay	Americas	South America
+North America	United States of America	Americas	Northern America
+Asia	Uzbekistan	Asia	Central Asia
+Europe	Vatican	Europe	Southern Europe
+North America	Saint Vincent and the Grenadines	Americas	Caribbean
+South America	Venezuela	Americas	South America
+North America	British Virgin Islands	Americas	Caribbean
+North America	United States Virgin Islands	Americas	Caribbean
+Asia	Vietnam	Asia	South-Eastern Asia
+Oceania	Vanuatu	Oceania	Melanesia
+Oceania	Wallis and Futuna	Oceania	Polynesia
+Oceania	Samoa	Oceania	Polynesia
+Asia	Yemen	Asia	Western Asia
+Africa	South Africa	Africa	Southern Africa
+Africa	Zambia	Africa	Eastern Africa
+Africa	Zimbabwe	Africa	Eastern Africa
+Asia	Cyprus	Asia	Western Asia
+Africa	Somalia	Africa	Eastern Africa
+Oceania	Pitcairn Islands	Oceania	Polynesia
