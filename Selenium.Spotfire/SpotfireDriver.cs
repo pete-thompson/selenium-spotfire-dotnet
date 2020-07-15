@@ -65,6 +65,7 @@ namespace Selenium.Spotfire
         private static Dictionary<string, bool> IsSpotfire103Cache = new Dictionary<string, bool>();
 
         private string TemporaryChromeExtensionsFolder;
+        private string ChromeLog;
 
         // These constructors are private - we construct through the static method GetDriverForSpotfire
         protected SpotfireDriver(ChromeDriverService service, ChromeOptions options, TimeSpan commandTimeout) : base(service, options, commandTimeout)
@@ -74,20 +75,17 @@ namespace Selenium.Spotfire
         // Protected implementation of Dispose pattern.
         protected override void Dispose(bool disposing)
         {
-            if (!disposed && disposing && (TemporaryChromeExtensionsFolder != null))
+
+            if (!disposed && disposing)
             {
                 try
                 {
                     // Dispose the driver service
                     DriverService.Dispose();
 
-                    // Delete the ChromeExtensions temporary files
-                    Directory.Delete(TemporaryChromeExtensionsFolder, true);
-                    // Check if the parent folder is now empty and we can delete it
-                    if (Directory.GetParent(TemporaryChromeExtensionsFolder).GetDirectories().Length == 0)
-                    {
-                        Directory.GetParent(TemporaryChromeExtensionsFolder).Delete();
-                    }
+                    CleanUpTempFiles(ChromeLog, TemporaryChromeExtensionsFolder);
+
+                    ChromeLog = null;
                     TemporaryChromeExtensionsFolder = null;
                 }
                 catch
@@ -99,6 +97,32 @@ namespace Selenium.Spotfire
             disposed = true;
             // Call base class implementation.
             base.Dispose(disposing);
+        }
+
+        private static void CleanUpTempFiles(string chromeLog, string temporaryChromeExtensionsFolder) 
+        {
+            if (chromeLog != null)
+            {
+                if (File.Exists(chromeLog))
+                {
+                    File.Delete(chromeLog);
+                }
+                // Check if the parent folder is now empty and we can delete it
+                if (Directory.GetParent(Path.GetDirectoryName(chromeLog)).GetDirectories().Length == 0)
+                {
+                    Directory.GetParent(Path.GetDirectoryName(chromeLog)).Delete();
+                }
+            }
+            if (temporaryChromeExtensionsFolder != null)
+            {
+                // Delete the ChromeExtensions temporary files
+                Directory.Delete(temporaryChromeExtensionsFolder, true);
+                // Check if the parent folder is now empty and we can delete it
+                if (Directory.GetParent(temporaryChromeExtensionsFolder).GetDirectories().Length == 0)
+                {
+                    Directory.GetParent(temporaryChromeExtensionsFolder).Delete();
+                }
+            }
         }
 
         /// <summary>
@@ -116,7 +140,7 @@ namespace Selenium.Spotfire
                 {
                     Regex rex = new Regex(@"\.ChromeExtensions\.(.*)\.([^\.]*)\.([^\.]*)$");
                     Match match = rex.Match(file);
-                    string dirPart = temporaryChromeExtensionsFolder + @"\" + match.Groups[1].Value;
+                    string dirPart = temporaryChromeExtensionsFolder + Path.DirectorySeparatorChar + match.Groups[1].Value;
                     string filePart = match.Groups[2].Value + "." + match.Groups[3].Value;
 
                     if (!Directory.Exists(dirPart))
@@ -132,7 +156,7 @@ namespace Selenium.Spotfire
                     using (var reader = new StreamReader(stream))
                     {
                         string fileContent = reader.ReadToEnd();
-                        File.WriteAllBytes(dirPart + @"\" + filePart, Encoding.UTF8.GetBytes(fileContent));
+                        File.WriteAllBytes(dirPart + Path.DirectorySeparatorChar + filePart, Encoding.UTF8.GetBytes(fileContent));
                     }
                 }
             }
@@ -154,16 +178,29 @@ namespace Selenium.Spotfire
             // Fetch the appropriate ChromeDriver
             new DriverManager().SetUpDriver(new ChromeConfig());
 
+            // If we're running in a container we always go headless and also run with --no-sandbox since we're likely running as root
+            // The DotNet docker images set this environment variable for us
+            bool inDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+
             // Set up Chrome's options
             var chromeOptions = new ChromeOptions();
-            if (headless)
+            if ((headless) || (inDocker))
             {
-                chromeOptions.AddArgument("headless");
+                chromeOptions.AddArgument("--headless");
+            }
+
+            if (inDocker)
+            {
+                chromeOptions.AddArgument("--no-sandbox");
             }
 
             chromeOptions.AddArgument("--auth-server-whitelist=*");
-            chromeOptions.AddArgument("window-size=1920,1080");
+            chromeOptions.AddArgument("--window-size=1920,1080");
             chromeOptions.AddArgument("--disable-infobars");
+            chromeOptions.AddArgument("--enable-logging");
+            string chromeLog = Path.Combine(Path.GetTempPath(), "SpotfireDriverChrome","chrome.log");
+            chromeOptions.AddArgument("--log-file=" + chromeLog);
+ 
             string temporaryChromeExtensionsFolder = Path.Combine(Path.GetTempPath(), "SpotfireDriverChrome", Path.GetRandomFileName());
             string[] extensions = UnpackChromeExtensions(temporaryChromeExtensionsFolder);
             if (extensions.Length > 0)
@@ -181,9 +218,23 @@ namespace Selenium.Spotfire
                     CultureInfo.InvariantCulture);
                 driver.DriverService = driverService;
                 driver.TemporaryChromeExtensionsFolder = temporaryChromeExtensionsFolder;
+                driver.ChromeLog = chromeLog;
             }
             catch
             {
+                // Write out diagnostic information
+                Console.WriteLine("Failed to start ChromeDriver");
+                Console.WriteLine("Chrome options: {0}", chromeOptions.ToString());
+                if (File.Exists(chromeLog)) 
+                {
+                    Console.WriteLine("Chrome log file:");
+                    foreach (String line in File.ReadAllLines("./chrome.log")) 
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+                // Clean anything up here - our object wasn't created so doesn't dispose
+                CleanUpTempFiles(chromeLog, temporaryChromeExtensionsFolder);
                 // Chrome hasn't started (perhaps a mismatch in versions?), so stop the driver process
                 driverService.Dispose();
                 throw;
