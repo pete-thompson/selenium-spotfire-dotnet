@@ -105,6 +105,11 @@ namespace Selenium.Spotfire
             {
                 if (File.Exists(chromeLog))
                 {
+                    Console.WriteLine("Chrome log file:");
+                    foreach (String line in File.ReadAllLines(chromeLog)) 
+                    {
+                        Console.WriteLine(line);
+                    }
                     File.Delete(chromeLog);
                 }
                 // Check if the parent folder is now empty and we can delete it
@@ -128,7 +133,6 @@ namespace Selenium.Spotfire
         /// <summary>
         /// Unpack our chrome extensions into the test folder ready for use
         /// </summary>
-        /// <param name="testContext"></param>
         /// <returns>A list of extensions</returns>
         private static string[] UnpackChromeExtensions(string temporaryChromeExtensionsFolder)
         {
@@ -171,20 +175,20 @@ namespace Selenium.Spotfire
         /// <typeparam name="TDriver">The type of driver to use (any subclass of SpotfireDriver)</typeparam>
         /// <param name="headless">Whether Chrome will run 'headless' or not (i.e. no visible window)</param>
         /// <returns></returns>
-        public static TDriver GetDriverForSpotfire<TDriver>(bool headless = false) where TDriver: SpotfireDriver
+        public static TDriver GetDriverForSpotfire<TDriver>(bool headless = false, bool includeChromeLogs = false) where TDriver: SpotfireDriver
         {
             TDriver driver=null;
 
             // Fetch the appropriate ChromeDriver
             new DriverManager().SetUpDriver(new ChromeConfig());
 
-            // If we're running in a container we always go headless and also run with --no-sandbox since we're likely running as root
+            // If we're running in a container we run with --no-sandbox since we're likely running as root
             // The DotNet docker images set this environment variable for us
             bool inDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
 
             // Set up Chrome's options
             var chromeOptions = new ChromeOptions();
-            if ((headless) || (inDocker))
+            if (headless)
             {
                 chromeOptions.AddArgument("--headless");
             }
@@ -196,17 +200,23 @@ namespace Selenium.Spotfire
 
             chromeOptions.AddArgument("--auth-server-whitelist=*");
             chromeOptions.AddArgument("--window-size=1920,1080");
-            chromeOptions.AddArgument("--disable-infobars");
-            chromeOptions.AddArgument("--enable-logging");
+
             string chromeLog = Path.Combine(Path.GetTempPath(), "SpotfireDriverChrome","chrome.log");
-            chromeOptions.AddArgument("--log-file=" + chromeLog);
+            if (includeChromeLogs) 
+            {
+                chromeOptions.AddArgument("--enable-logging");
+                chromeOptions.AddArgument("--log-file=" + chromeLog);
+                chromeOptions.AddArgument("--log-level=0");
+            }
  
             string temporaryChromeExtensionsFolder = Path.Combine(Path.GetTempPath(), "SpotfireDriverChrome", Path.GetRandomFileName());
             string[] extensions = UnpackChromeExtensions(temporaryChromeExtensionsFolder);
             if (extensions.Length > 0)
             {
-                chromeOptions.AddArgument("load-extension=" + string.Join(",", extensions));
+                chromeOptions.AddArgument("--load-extension=" + string.Join(",", extensions));
             }
+
+            Console.WriteLine("Chrome options: {0}", chromeOptions.ToString());
 
             var driverService = ChromeDriverService.CreateDefaultService();
             try
@@ -216,6 +226,11 @@ namespace Selenium.Spotfire
                     null,
                     new object[] { driverService, chromeOptions, TimeSpan.FromMinutes(30) },
                     CultureInfo.InvariantCulture);
+                driverService.LogPath = chromeLog;
+                if (includeChromeLogs)
+                {
+                    driverService.EnableVerboseLogging = true;
+                }
                 driver.DriverService = driverService;
                 driver.TemporaryChromeExtensionsFolder = temporaryChromeExtensionsFolder;
                 driver.ChromeLog = chromeLog;
@@ -224,15 +239,6 @@ namespace Selenium.Spotfire
             {
                 // Write out diagnostic information
                 Console.WriteLine("Failed to start ChromeDriver");
-                Console.WriteLine("Chrome options: {0}", chromeOptions.ToString());
-                if (File.Exists(chromeLog)) 
-                {
-                    Console.WriteLine("Chrome log file:");
-                    foreach (String line in File.ReadAllLines("./chrome.log")) 
-                    {
-                        Console.WriteLine(line);
-                    }
-                }
                 // Clean anything up here - our object wasn't created so doesn't dispose
                 CleanUpTempFiles(chromeLog, temporaryChromeExtensionsFolder);
                 // Chrome hasn't started (perhaps a mismatch in versions?), so stop the driver process
