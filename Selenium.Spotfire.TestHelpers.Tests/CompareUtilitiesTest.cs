@@ -278,8 +278,8 @@ namespace Selenium.Spotfire.TestHelpers.Tests
         [TestMethod]
         public void MismatchingImagesDifferentPixelDepth()
         {
-            Bitmap bitmap1 = new Bitmap(10, 10, PixelFormat.Format16bppArgb1555);
-            Bitmap bitmap2 = new Bitmap(10, 10, PixelFormat.Format16bppGrayScale);
+            Bitmap bitmap1 = new Bitmap(10, 10, PixelFormat.Format32bppPArgb);
+            Bitmap bitmap2 = new Bitmap(10, 10, PixelFormat.Format32bppArgb);
 
             Assert.IsFalse(CompareUtilities.AreEqual(bitmap1, bitmap2));
         }
