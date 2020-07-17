@@ -1,3 +1,5 @@
+image: petethompson1968/selenium-spotfire-dotnet:2.1
+
 stages:
   - build
   - test
@@ -20,7 +22,10 @@ test:
   stage: test
   allow_failure: true
   script:
-    - dotnet test "--settings:$runSettings" --results-directory ./test-results
+    - |
+      export DISPLAY=:20
+      Xvfb :20 -screen 0 1920x1080x16 &
+      dotnet test "--settings:$runSettings" --results-directory ./test-results
   artifacts:
     when: always
     paths: 
