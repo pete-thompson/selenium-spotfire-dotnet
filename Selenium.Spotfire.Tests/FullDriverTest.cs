@@ -29,6 +29,20 @@ namespace Selenium.Spotfire.Tests
                 return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireServerURL")).Select(i => i.Value.ToString()).ToArray();
             }
         }
+        private string[] SpotfireUsernames
+        {
+            get
+            {
+                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireUsername")).Select(i => i.Value.ToString()).ToArray();
+            }
+        }
+        private string[] SpotfirePasswords
+        {
+            get
+            {
+                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfirePassword")).Select(i => i.Value.ToString()).ToArray();
+            }
+        }
         private string TestFile
         {
             get
@@ -54,6 +68,11 @@ namespace Selenium.Spotfire.Tests
             {
                 Spotfires[counter] = SpotfireDriver.GetDriverForSpotfire<SpotfireDriver>((TestContext.Properties["ChromeHeadless"] ?? "").ToString().Length > 0);
                 Spotfires[counter].OutputToConsole = true;
+
+                if (SpotfireUsernames.Count()>counter)
+                {
+                    Spotfires[counter].SetCredentials(SpotfireUsernames[counter], SpotfirePasswords[counter]);
+                }
 
                 Spotfires[counter].OpenSpotfireAnalysis(URL, TestFile);
 
