@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
@@ -254,9 +254,9 @@ namespace Selenium.Spotfire
         /// </summary>
         /// <param name="headless">Whether Chrome will run 'headless' or not (i.e. no visible window)</param>
         /// <returns></returns>
-        public static SpotfireDriver GetDriverForSpotfire(bool headless = false)
+        public static SpotfireDriver GetDriverForSpotfire(bool headless = false,  bool includeChromeLogs = false)
         {
-            return GetDriverForSpotfire<SpotfireDriver>(headless);
+            return GetDriverForSpotfire<SpotfireDriver>(headless, includeChromeLogs);
         }
 
         /// <summary>

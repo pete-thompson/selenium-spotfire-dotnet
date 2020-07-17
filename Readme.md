@@ -85,6 +85,11 @@ using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire(true))
 {
 }
 
+// Run Chrome 'Headless' and capture Chrome's logs
+using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire(true, true))
+{
+}
+
 // Run Chrome visibly
 using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire())
 {
@@ -390,6 +395,8 @@ The GetDriverForSpotfire method will set whether Chrome is used 'headless' or no
 on the presence of the "ChromeHeadless" property in the test context. This allows configuration of the headless property
 in the .runSettings file.
 
+Similarly, the presence of a value for "IncludeChromeLogs" in the test context will enable the capture of logs from Chrome.
+
 ```c#
 // Open Spotfire
 using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(testContext))
@@ -405,6 +412,7 @@ Run settings to show the Chrome window:
 <RunSettings>
   <TestRunParameters>
   	<Parameter name="ChromeHeadless" value="" />
+  	<Parameter name="IncludeChromeLogs" value="" />
 ...
   <TestRunParameters> 
 ...
@@ -418,6 +426,21 @@ Run settings for headless:
 <RunSettings>
   <TestRunParameters>
   	<Parameter name="ChromeHeadless" value="headless" />
+  	<Parameter name="IncludeChromeLogs" value="" />
+...
+  <TestRunParameters>
+...
+<RunSettings>
+```
+
+Run settings for capturing Chrome logs:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <TestRunParameters>
+  	<Parameter name="ChromeHeadless" value="" />
+  	<Parameter name="IncludeChromeLogs" value="logs" />
 ...
   <TestRunParameters>
 ...
@@ -444,7 +467,6 @@ in the test results.
 ## Test helpers
 
 The test helpers are intended to simplify the authoring of tests.
-
 
 ### Comparing images
 

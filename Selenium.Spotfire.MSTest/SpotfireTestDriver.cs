@@ -69,7 +69,8 @@ namespace Selenium.Spotfire.MSTest
         {
             SpotfireTestDriver driver;
 
-            driver = GetDriverForSpotfire<SpotfireTestDriver>((testContext.Properties["ChromeHeadless"] ?? "").ToString().Length>0);
+            driver = GetDriverForSpotfire<SpotfireTestDriver>((testContext.Properties["ChromeHeadless"] ?? "").ToString().Length>0,
+                                                              (testContext.Properties["IncludeChromeLogs"] ?? "").ToString().Length>0);
 
             driver.TestContext = testContext;
 
