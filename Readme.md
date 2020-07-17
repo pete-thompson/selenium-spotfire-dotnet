@@ -96,6 +96,21 @@ using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire())
 }
 ```
 
+### A note on Headless mode
+
+Running Chrome in "headless" mode means that it runs without any visible user interface (UI). This is generally
+useful when running automation since you wouldn't want the UI to appear on screen, or you might be running
+the automation on a build server unattended. There are unfortunately restrictions to headless mode,
+mostly due to the fact that headless Chrome doesn't support extensions. The SpotfireDriver makes use
+of extensions for two capabilities - so these are not available in headless mode:
+* Passing of credentials to a browser 'challenge' (see Authentication below) - the ```SetCredentials``` method.
+* Hiding the browser's download bar when data is downloaded. This functionality ensures that Spotfire
+visualisations stay the same size as expected when using capabilities like collecting the data from a table visualisation. Unfortunately this means that headless tests might see strange resize behaviour.
+
+The [Selenium-Spotfire-Dotnet Docker container](https://github.com/pete-thompson/selenium-spotfire-dotnet-docker) has been built to work around these restrictions. Applications that are
+executed inside this container can use Chrome in normal mode without a UI appearing - the Chrome UI is 
+sent to an X Windows virtual frame buffer, meaning that Chrome believes it's rendering a UI but nothing is visible.
+
 ### Debug logging
 
 The driver generates debug log messages which can be sent to the console. Sub-classes of the driver can capture these messages
@@ -114,6 +129,21 @@ The driver includes several custom Exception classes:
 exist will result in this error.
 * PageNotChangedException - thrown if an attempt to change page fails (e.g. because the page doesn't exist).
 * VisualCannotBeMaximizedException - thrown if an attempt is made to maximize a visual that can't be maximized.
+
+### Authentication
+
+Spotfire supports a multitude of different mechanisms for authentication. The framework includes mechanisms to support 
+Kerberos, NTLM and other methods that send 'challenges' to the browser. Other authentication approaches can be implemented
+by using standard Selenium methods to authenticate to Spotfire prior to opening an analytic.
+
+* Kerberos - the framework starts Chrome and asks that it support Kerberos authentication to any host. If your tests are running on Windows
+Chrome will automatically pick up the logged in user. If you're using Linux, use the kinit command to obtain a Kerberos ticket command prior to starting the executable using the Selenium.Spotfire driver.
+* NTLM under Windows - the framework starts Chrome and asks that it support passing the current user identity to any host.
+* NTLM under Linux, or other methods that send a browser 'challenge'. Use the ```SetCredetials``` method to pass in the appropriate identity. You can use this method to support authentication to any host, for example you may need to navigate to a different host involved in Enterprise wide single-signon which uses NTLM then generates cookies that can be sent to Spotfire.
+
+```c#
+spotfire.SetCredentials("username", "Password");
+```
 
 ### Opening a Spotfire analytic
 

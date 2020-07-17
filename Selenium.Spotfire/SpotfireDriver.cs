@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
@@ -66,6 +66,9 @@ namespace Selenium.Spotfire
 
         private string TemporaryChromeExtensionsFolder;
         private string ChromeLog;
+
+        // Whether we've loaded our JS wrapper yet
+        private bool WrapperLoaded = false;
 
         // These constructors are private - we construct through the static method GetDriverForSpotfire
         protected SpotfireDriver(ChromeDriverService service, ChromeOptions options, TimeSpan commandTimeout) : base(service, options, commandTimeout)
@@ -296,6 +299,36 @@ namespace Selenium.Spotfire
         }
 
         /// <summary>
+        /// Ensure that our JS wrapper has been loaded into the browser
+        /// </summary>
+        private void EnsureWrapperLoaded()
+        {
+            if (!WrapperLoaded)
+            {
+                SpotfireWrapperServer.StartupServer();
+                this.Navigate().GoToUrl("http://localhost:" + SpotfireWrapperServer.Port + "/SpotfireWrapper.html");
+                SpotfireWrapperServer.StopServer();
+
+                WrapperLoaded = true;
+            }
+        }
+
+        /// <summary>
+        /// Set credentials to be used if the browser receives a 'challenge' for username/password (e.g. when using Integrated Windows Authentication)
+        /// </summary>
+        /// <param name="username">Username to use. Blank values are ignored.</param>
+        /// <param name="password">Password to use</param>
+        public void SetCredentials(string username, string password)
+        {
+            EnsureWrapperLoaded();
+
+            if (username.Length > 0)
+            {
+                ((IJavaScriptExecutor)this).ExecuteScript("SpotfireTestWrapper.setCredentials(arguments[0],arguments[1])", username, password);
+            }
+        }
+
+        /// <summary>
         /// Open a Spotfire analysis and wait for it to fully open
         /// </summary>
         /// <param name="driver">The Selenium WebDriver</param>
@@ -311,9 +344,7 @@ namespace Selenium.Spotfire
 
             OutputStatusMessage(String.Format("Opening Spotfire analysis from server {0}. Path {1}. Configuration Block: {2}", serverUrl, filePath, configurationBlock));
 
-            SpotfireWrapperServer.StartupServer();
-            this.Navigate().GoToUrl("http://localhost:" + SpotfireWrapperServer.Port + "/SpotfireWrapper.html");
-            SpotfireWrapperServer.StopServer();
+            EnsureWrapperLoaded();
 
             const string OpenScript = "SpotfireTestWrapper.startSpotfire(arguments[0],arguments[1],arguments[2]);";
 
