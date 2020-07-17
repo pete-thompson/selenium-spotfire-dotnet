@@ -41,6 +41,13 @@ to install the MSTest helper package:
 PM> Install-Package Selenium.Spotfire.MSTest
 ```
 
+## Requirements
+
+The helpers use Chrome for automation of Spotfire, thus require a working version of Chrome as well as a compatible ChromeDriver.
+
+The [Selenium-Spotfire-Dotnet Docker container](https://github.com/pete-thompson/selenium-spotfire-dotnet-docker) has been built to meet all the requirements of the helpers.
+The container contains the DotNet framework SDK, Chrome, the ChromeDriver and the Xvfb to support running Chrome without a user interface.
+
 ## Usage
 
 The starting point for automating Spotfire, or running an automated test, is to instantiate a 'driver'. The driver
@@ -76,6 +83,16 @@ The general pattern for using the driver classes is:
 The general purpose driver (Spotfire.Selenium.SpotfireDriver) incorporates most of the features implemented by this project.
 The following sections show examples of how to call the driver to achieve certain requirements, they are not intended
 to be functional examples (e.g. you would pick one of the methods of opening an analytic, not all 4).
+
+### Fetching ChromeDriver
+
+A utility method is provided which will download the latest ChromeDriver executable and make it available for use. This is useful
+if you're running in an environment where the latest version of Chrome is installed and liable to update automatically. This method
+isn't required if you use the companion Docker container since it includes the correct ChromeDriver version.
+
+```c#
+SpotfireDriver.GetChromeDriver()
+```
 
 ### Obtaining a driver
 

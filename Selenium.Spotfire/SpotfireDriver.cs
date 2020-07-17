@@ -171,6 +171,15 @@ namespace Selenium.Spotfire
             return answer.ToArray();
         }
 
+        ///<summary>
+        /// Fetch the latest version of the ChromeDriver.
+        /// Use this if you're running on a machine that has the latest version of Chrome but may not have ChromeDriver installed
+        /// </summary>
+        public static void GetChromeDriver()
+        {
+            new DriverManager().SetUpDriver(new ChromeConfig());
+        }
+
 
         /// <summary>
         /// Get a Selenium driver that we can use for testing Spotfire
@@ -181,9 +190,6 @@ namespace Selenium.Spotfire
         public static TDriver GetDriverForSpotfire<TDriver>(bool headless = false, bool includeChromeLogs = false) where TDriver: SpotfireDriver
         {
             TDriver driver=null;
-
-            // Fetch the appropriate ChromeDriver
-            new DriverManager().SetUpDriver(new ChromeConfig());
 
             // If we're running in a container we run with --no-sandbox since we're likely running as root
             // The DotNet docker images set this environment variable for us
