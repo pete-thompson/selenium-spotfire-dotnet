@@ -18,6 +18,7 @@ test:
   allow_failure: true
   script:
     - |
+      set
       kinit $KerberosUsername <<< $kerberosPassword
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
