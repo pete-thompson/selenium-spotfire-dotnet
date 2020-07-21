@@ -33,7 +33,8 @@ test:
 publish:
   stage: publish
   when: manual
-  tags: spotfire-server
+  tags: 
+    - spotfire-server
   dependencies:
     - build
   script:
