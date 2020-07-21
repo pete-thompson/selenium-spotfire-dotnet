@@ -18,8 +18,7 @@ test:
   allow_failure: true
   script:
     - |
-      set
-      kinit $KerberosUsername <<< $kerberosPassword
+      kinit $KerberosUsername <<< $KerberosPassword
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
       dotnet test "--settings:$runSettings" --results-directory ./test-results
