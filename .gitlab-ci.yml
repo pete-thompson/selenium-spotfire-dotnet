@@ -25,7 +25,7 @@ test:
   artifacts:
     when: always
     paths: 
-    - test-results
+    - ./**/test-results
 
 # Publish stage has to run on our specific runner because
 # - nuget signing isn't supported on Linux (so we can't use Docker)
