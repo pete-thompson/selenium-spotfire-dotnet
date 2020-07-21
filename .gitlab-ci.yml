@@ -43,4 +43,4 @@ publish:
         write-host "Signing $_"
         d:\nuget\nuget sign $_ -certificatePath d:\nuget\SpotfireCodeSigning.pfx -certificatePassword $certificatePassword -timestamper http://timestamp.digicert.com
       }
-      dotnet nuget push **/Selenium.Spotfire*.nupkg --api-key $NuGetAPIKey --source https://api.nuget.org/v3/index.json
+      dotnet nuget push **/Selenium.Spotfire*.nupkg --api-key $NuGetAPIKey --source https://api.nuget.org/v3/index.json --skip-duplicate
