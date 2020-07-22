@@ -264,3 +264,5 @@ __pycache__/
 /Standard.runSettings
 /.sonarlint/SpotfirePlatformCSharp.ruleset
 /.sonarlint/Selenium.Spotfire.slconfig
+**/*test-results.xml
+**/test-results/
