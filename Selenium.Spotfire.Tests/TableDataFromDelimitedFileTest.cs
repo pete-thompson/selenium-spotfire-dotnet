@@ -51,11 +51,11 @@ namespace Selenium.Spotfire.Tests
 
                 table.DumpOutData(TestContext.WriteLine);
 
-                string filename = TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + ".txt";
+                string filename = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + ".txt";
                 table.SaveToFile(filename);
                 this.TestContext.AddResultFile(filename);
 
-                filename = TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + ".csv";
+                filename = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + ".csv";
                 table.SaveToFile(filename, ',');
                 this.TestContext.AddResultFile(filename);
             }

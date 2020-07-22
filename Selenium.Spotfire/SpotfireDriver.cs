@@ -204,7 +204,11 @@ namespace Selenium.Spotfire
 
             if (inDocker)
             {
+                // Our Docker container runs as root, so we need to use the less secure no-sandbox mode - but that shouldn't be an issue because
+                // (a) we're only opening controlled Spotfire sites and (b) we're using Docker containers that will be torn down after use
                 chromeOptions.AddArgument("--no-sandbox");
+                // Ideally we'd ask that the --shm-size parameter be used to give Chrome more shared memory to work with, but sometimes that isn't possible (e.g. under GitLab)
+                chromeOptions.AddArgument("--disable-dev-shm-usage");
             }
 
             chromeOptions.AddArgument("--auth-server-whitelist=*");
@@ -624,13 +628,13 @@ namespace Selenium.Spotfire
                         text.Click();
                         IWebElement dialog = FindElement("Notification details dialog", By.CssSelector("div.sf-element-modal-dialog-body textarea"));
                         // Remove the extra blank lines so the notifications match pre-10.3 text
-                        answer += dialog.GetAttribute("value").Replace("\r\n\r\n","\r\n");
+                        answer += dialog.GetAttribute("value").Replace(Environment.NewLine + Environment.NewLine,Environment.NewLine);
                         FindElement(By.CssSelector("div.sf-element-modal-dialog  button:not(.sfpc-secondary)")).Click();
                         WaitUntilElementDisappears("Notification details dialog", By.CssSelector("div.sf-element-modal-dialog"));
                     }
 
                     // Remove trailing newline so we match previous versions of Spotfire
-                    answer = Regex.Replace(answer, "(\r\n)+$", "");
+                    answer = Regex.Replace(answer, "(" + Environment.NewLine + ")+$", "");
 
                     // Click dismiss all button
                     notifications.FindElement(By.CssSelector("div[class^='sfx_notification-clear']")).Click();

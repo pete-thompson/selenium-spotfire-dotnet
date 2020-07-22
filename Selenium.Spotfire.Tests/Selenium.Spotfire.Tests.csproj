@@ -56,7 +56,7 @@
     <None Update="DataFiles\ExpectedMarkingWorldCountries.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataFiles\ExpectedText-Text + Web-Text Area.txt">
+    <None Update="DataFiles\ExpectedText-Text + web-Text Area.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataFiles\SimpleDataFile.txt">
@@ -68,6 +68,9 @@
     <None Update="Images\ExpectedImage-Charts-Bar-Possible-2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-Charts-Bar-Possible-.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-Charts-Combination-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -77,10 +80,16 @@
     <None Update="Images\ExpectedImage-Charts-Combination-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-Charts-Combination-Possible-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-Charts-Line-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Charts-Line-Possible-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\ExpectedImage-Charts-Line-Possible-.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Charts-Pie-Possible-1.png">
@@ -92,6 +101,9 @@
     <None Update="Images\ExpectedImage-Charts-Pie-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-Charts-Pie-Possible-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-Charts-Scatter-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -101,10 +113,16 @@
     <None Update="Images\ExpectedImage-Charts-Scatter-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-Charts-Scatter-Possible-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-Charts-Waterfall-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Charts-Waterfall-Possible-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\ExpectedImage-Charts-Waterfall-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Map-Map Chart-Possible-1.png">
@@ -116,10 +134,16 @@
     <None Update="Images\ExpectedImage-Map-Map Chart-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-Map-Map Chart-Possible-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-More charts-Box Plot-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-More charts-Box Plot-Possible-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\ExpectedImage-More charts-Box Plot-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-More charts-Heat map-Possible-1.png">
@@ -128,10 +152,16 @@
     <None Update="Images\ExpectedImage-More charts-Heat map-Possible-2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-More charts-Heat map-Possible-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-More charts-KPI Chart-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-More charts-KPI Chart-Possible-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\ExpectedImage-More charts-KPI Chart-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-More charts-Parallel Coordinate Plot-Possible-1.png">
@@ -140,10 +170,16 @@
     <None Update="Images\ExpectedImage-More charts-Parallel Coordinate Plot-Possible-2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-More charts-Parallel Coordinate Plot-Possible-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-More charts-Tree-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-More charts-Tree-Possible-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\ExpectedImage-More charts-Tree-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Text + web-JavaScript Visualization-Possible-1.png">
@@ -155,10 +191,16 @@
     <None Update="Images\ExpectedImage-Text + web-JavaScript Visualization-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\ExpectedImage-Text + web-JavaScript Visualization-Possible-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\ExpectedImage-VisualTests-Charts-Bar-Possible-1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-VisualTests-Charts-Pie-Possible-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\ExpectedImage-VisualTests-Charts-Pie-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

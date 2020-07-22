@@ -540,7 +540,7 @@ The comparison tools can also modify bitmaps to highlight the differences betwee
 CompareUtilities.GenerateImageDifference(expectedImage, actual);
 // Both bitmaps will be updated with Red highlighting where differences are found
 // Here we're going to save an image and attach to the MSTest context
-path = TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "Image differences.png";
+path = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "Image differences.png";
 actual.Save(path);
 this.TestContext.AddResultFile(path);
 ```

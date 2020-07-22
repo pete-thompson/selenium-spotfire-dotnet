@@ -66,7 +66,8 @@ namespace Selenium.Spotfire.Tests
             int counter = 0;
             foreach (string URL in SpotfireServerUrls)
             {
-                Spotfires[counter] = SpotfireDriver.GetDriverForSpotfire<SpotfireDriver>((TestContext.Properties["ChromeHeadless"] ?? "").ToString().Length > 0);
+                Spotfires[counter] = SpotfireDriver.GetDriverForSpotfire<SpotfireDriver>((TestContext.Properties["ChromeHeadless"] ?? "").ToString().Length > 0,
+                                                                                         (TestContext.Properties["IncludeChromeLogs"] ?? "").ToString().Length>0);
                 Spotfires[counter].OutputToConsole = true;
 
                 if (SpotfireUsernames.Count()>counter)
@@ -374,7 +375,8 @@ namespace Selenium.Spotfire.Tests
                             if (visual.IsTextType)
                             {
                                 string expectedDataPath = Path.Combine(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataFiles"), string.Format("ExpectedText-{0}-{1}.txt", page.Item1, visual.Title));
-                                string expected = File.ReadAllText(expectedDataPath);
+                                // Files are created on Windows system but might be used for tests run under Linux
+                                string expected = File.ReadAllText(expectedDataPath).Replace("\r\n", Environment.NewLine);
                                 TestContext.WriteLine(string.Format("Text visual, content: {0}", visual.Text));
                                 checks.CheckErrors(() => Assert.AreEqual(expected, visual.Text, "Text for visual {0} on page {1} for instance {2} does not match expected.", visual.Title, page.Item1, spotfireInstanceCount));
                             }
@@ -391,7 +393,7 @@ namespace Selenium.Spotfire.Tests
                                 checks.CheckErrors(() => Assert.AreEqual(current, visual.Content.Size, "Resizing visual {0} failed", visual.Title));
 
                                 Bitmap image = visual.GetImage();
-                                string path = TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".png";
+                                string path = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".png";
                                 image.Save(path);
                                 this.TestContext.AddResultFile(path);
 
@@ -411,7 +413,7 @@ namespace Selenium.Spotfire.Tests
                                     {
                                         Regex pattern = new Regex(@"([^-]*)\.png$");
                                         Match match = pattern.Match(filename);
-                                        imagesToSave.Add(TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + "-difference vs. " + match.Groups[1].Value + ".png", difference);
+                                        imagesToSave.Add(TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + "-difference vs. " + match.Groups[1].Value + ".png", difference);
                                     }
                                 }
 
@@ -435,7 +437,7 @@ namespace Selenium.Spotfire.Tests
                                 {
                                     TestContext.WriteLine(string.Format("Tabular data, {0} columns", data.Columns.Length));
                                     checks.CheckErrors(() => Assert.IsTrue(CompareUtilities.AreEqual(expectedData, data), "Data for visual {0} on page {1} for instance {2} does not match expected data", visual.Title, page.Item1, spotfireInstanceCount));
-                                    string path = TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".txt";
+                                    string path = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".txt";
                                     data.SaveToFile(path);
                                     this.TestContext.AddResultFile(path);
                                 }
@@ -610,11 +612,11 @@ namespace Selenium.Spotfire.Tests
 
                 spotfire.SetDocumentProperty("TriggerWarning", "A test warning");
                 answer = spotfire.GetNotifications();
-                checks.CheckErrors(() => Assert.AreEqual("Test warning\r\nA test warning\r\nA test warning", answer, "Test warning failed"));
+                checks.CheckErrors(() => Assert.AreEqual("Test warning" + Environment.NewLine + "A test warning" + Environment.NewLine + "A test warning", answer, "Test warning failed"));
 
                 spotfire.SetDocumentProperty("TriggerError", "A test error");
                 answer = spotfire.GetNotifications();
-                checks.CheckErrors(() => Assert.AreEqual("Test error\r\nA test error\r\nA test error", answer, "Test error failed"));
+                checks.CheckErrors(() => Assert.AreEqual("Test error" + Environment.NewLine + "A test error" + Environment.NewLine + "A test error", answer, "Test error failed"));
             }
             checks.AssertEmpty();
         }

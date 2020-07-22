@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Selenium.Spotfire;
 
 namespace Selenium.Spotfire.MSTest
@@ -64,7 +65,6 @@ namespace Selenium.Spotfire.MSTest
         /// </summary>
         /// <param name="testContext">The current test context</param>
         /// <returns></returns>
-        [DeploymentItem(@"ChomeExtensions\")]
         public static SpotfireTestDriver GetDriverForSpotfire(TestContext testContext)
         {
             SpotfireTestDriver driver;
@@ -97,7 +97,7 @@ namespace Selenium.Spotfire.MSTest
         {
             SetDownloadFolder(TestContext.TestDir);
             Screenshot ss = ((ITakesScreenshot)this).GetScreenshot();
-            string path = TestContext.TestDir + "\\" + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + 
+            string path = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + 
                 "-" + DriverNumber.ToString("00000") + "-" + ScreenshotCounter.ToString("00000") + "-" + stepName + ".png";
             ss.SaveAsFile(path);
             this.TestContext.AddResultFile(path);
