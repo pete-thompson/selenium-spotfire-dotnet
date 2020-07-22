@@ -68,7 +68,7 @@
     <None Update="Images\ExpectedImage-Charts-Bar-Possible-2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\ExpectedImage-Charts-Bar-Possible-.png">
+    <None Update="Images\ExpectedImage-Charts-Bar-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Charts-Combination-Possible-1.png">
@@ -89,7 +89,7 @@
     <None Update="Images\ExpectedImage-Charts-Line-Possible-2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\ExpectedImage-Charts-Line-Possible-.png">
+    <None Update="Images\ExpectedImage-Charts-Line-Possible-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\ExpectedImage-Charts-Pie-Possible-1.png">
