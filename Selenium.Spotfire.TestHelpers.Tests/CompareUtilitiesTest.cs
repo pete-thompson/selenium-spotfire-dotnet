@@ -290,7 +290,7 @@ namespace Selenium.Spotfire.TestHelpers.Tests
         [TestMethod]
         public void ImagesFromFileTest()
         {
-            string imageFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Images");
+            string imageFolder = Environment.GetEnvironmentVariable("images_folder");
             for (int imageCount = 0; Directory.GetFiles(imageFolder, string.Format("Image-{0}-0-*.png", imageCount)).Length>0; imageCount++)
             {
                 string filename0 = Directory.GetFiles(imageFolder, string.Format("Image-{0}-0-*.png", imageCount))[0];

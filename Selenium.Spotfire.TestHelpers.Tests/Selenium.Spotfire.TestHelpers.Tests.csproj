@@ -29,13 +29,4 @@
     <ProjectReference Include="..\Selenium.Spotfire.TestHelpers\Selenium.Spotfire.TestHelpers.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Images\Image-0-0-7.13 image.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Image-0-1-10.3 image with light border.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
