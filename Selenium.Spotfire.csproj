@@ -1,0 +1,12 @@
+<Project>
+    <ItemGroup>
+        <Projects Include="**\*.csproj" />
+        <Watch Include="**\*.cs" />
+    </ItemGroup>
+
+    <Target Name="Build">
+        <MSBuild Targets="VSTest" Projects="@(Projects)" />
+    </Target>
+
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft.Common.targets" />
+</Project>

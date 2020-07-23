@@ -7,19 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Selenium.Spotfire.Tests/Selenium.Spotfire.Tests.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/Selenium.Spotfire.Tests/Selenium.Spotfire.Tests.csproj",
+                "${workspaceFolder}",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -31,8 +19,8 @@
             "type": "process",
             "args": [
                 "watch",
-                "run",
-                "${workspaceFolder}/Selenium.Spotfire.Tests/Selenium.Spotfire.Tests.csproj",
+                "build",
+                "${workspaceFolder}",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

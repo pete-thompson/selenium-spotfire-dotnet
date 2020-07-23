@@ -545,7 +545,35 @@ actual.Save(path);
 this.TestContext.AddResultFile(path);
 ```
 
-#### Comparing tables
+### Comparing visuals to saved image files
+
+A common pattern is to compare the contents of a visual with saved images to check whether data is showing as expected. Unfortunately, several
+factors can conspire to make the image appear slightly different even though the contents are the same. For example, running the tests under
+Windows and Linux generates different images because the fonts used by Chrome vary very slightly. The compare utilities include a helper
+to compare the on-screen visual against multiple saved image files to see if any of them match, while also generating images
+showing the differences, thus making it easier to capture new image files during testing to reuse after they have been manually verified.
+
+In the following example, we've created a folder named '/test/imagesfolder' containing multiple image files to compare against ('expectedimage-1.png', 'expectedimage-2.png' etc.):
+
+```c#
+Dictionary<string, Bitmap> imageComparisons = new Dictionary<string, Bitmap>();
+
+bool anyMatch = VisualCompare.CompareVisualImages(visual, "/test/imagesfolder", "expectedimage", imageComparisons);
+
+// If there's no match we need to write out the mismatches
+if (!anyMatch)
+{
+    TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
+    foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
+    {
+        string filename = Path.Combine(TestContext.TestDir, instancePrefix + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + "-" + imageToSave.Key);
+        imageToSave.Value.Save(filename);
+        this.TestContext.AddResultFile(filename);
+    }
+}
+```
+
+### Comparing tables
 
 The comparison tools also allow for checking data in table visuals.
 Note use of the disposable pattern to ensure that temporary data associated with the tables is cleaned up.

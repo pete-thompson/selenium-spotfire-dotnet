@@ -1,7 +1,10 @@
 {
     "omnisharp" : {
-        "testRunSettings": "./standard.runSettings"
+        "testRunSettings": "./outsideDocker.runSettings"
     },
-    "dotnet-test-explorer.testArguments": "--settings:./standard.runSettings",
-//    "dotnet-test-explorer.settingsFile": "./standard.runSettings",
+    "dotnet-test-explorer.testArguments": "--settings:./outsideDocker.runSettings",
+    "terminal.integrated.env.windows": {
+        "images_folder": "${workspaceFolder}/test-resources/images"
+    }
+//    "dotnet-test-explorer.settingsFile": "./outsideDocker.runSettings",
 }

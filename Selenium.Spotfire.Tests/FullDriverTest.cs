@@ -62,6 +62,11 @@ namespace Selenium.Spotfire.Tests
                 }
             }
 
+            if ((TestContext.Properties["DownloadChromeDriver"] ?? "").ToString().Length > 0)
+            {
+                SpotfireDriver.GetChromeDriver();
+            }
+
             Spotfires = new SpotfireDriver[SpotfireServerUrls.Length];
             int counter = 0;
             foreach (string URL in SpotfireServerUrls)
@@ -393,38 +398,24 @@ namespace Selenium.Spotfire.Tests
                                 checks.CheckErrors(() => Assert.AreEqual(current, visual.Content.Size, "Resizing visual {0} failed", visual.Title));
 
                                 Bitmap image = visual.GetImage();
-                                string path = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".png";
+                                string instancePrefix = (spotfireInstanceCount > 0) ? spotfireInstanceCount.ToString("000") + "-" : "";
+                                string path = TestContext.TestDir + Path.DirectorySeparatorChar + instancePrefix + TestContext.FullyQualifiedTestClassName + "-"+ TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".png";
                                 image.Save(path);
                                 this.TestContext.AddResultFile(path);
 
-                                Dictionary<string, Bitmap> imagesToSave = new Dictionary<string, Bitmap>();
+                                Dictionary<string, Bitmap> imageComparisons = new Dictionary<string, Bitmap>();
 
-                                bool anyMatch = false;
-                                foreach (string filename in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Images"), string.Format("ExpectedImage-{0}-{1}-Possible-*.png", page.Item1, visual.Title)))
-                                {
-                                    Bitmap expectedImage = new Bitmap(filename);
-
-                                    visual.ResizeContent(expectedImage.Size);
-                                    Bitmap difference = visual.GetImage();
-
-                                    bool thisMatch = CompareUtilities.GenerateImageDifference(expectedImage, difference);
-                                    anyMatch = anyMatch || thisMatch;
-                                    if (!thisMatch)
-                                    {
-                                        Regex pattern = new Regex(@"([^-]*)\.png$");
-                                        Match match = pattern.Match(filename);
-                                        imagesToSave.Add(TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + "-difference vs. " + match.Groups[1].Value + ".png", difference);
-                                    }
-                                }
+                                bool anyMatch = VisualCompare.CompareVisualImages(visual, Environment.GetEnvironmentVariable("images_folder"),string.Format("{0}-{1}-{2}-{3}", TestContext.FullyQualifiedTestClassName, TestContext.TestName, page.Item1, visual.Title),imageComparisons);
 
                                 // If there's no match we need to write out the mismatches
                                 if (!anyMatch)
                                 {
                                     TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
-                                    foreach(KeyValuePair<string, Bitmap> imageToSave in imagesToSave)
+                                    foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
                                     {
-                                        imageToSave.Value.Save(imageToSave.Key);
-                                        this.TestContext.AddResultFile(imageToSave.Key);
+                                        string filename = Path.Combine(TestContext.TestDir, instancePrefix + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + "-" + imageToSave.Key);
+                                        imageToSave.Value.Save(filename);
+                                        this.TestContext.AddResultFile(filename);
                                     }
                                 }
                                 checks.CheckErrors(() => Assert.IsTrue(anyMatch, "Image for visual {0} on page {1} for instance {2} does not match a possible expected image", visual.Title, page.Item1, spotfireInstanceCount));

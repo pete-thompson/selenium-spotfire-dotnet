@@ -18,6 +18,7 @@ test:
   allow_failure: true
   script:
     - |
+      export images_folder=$(pwd)/test-resources/images
       kinit $KerberosUsername <<< $KerberosPassword
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
