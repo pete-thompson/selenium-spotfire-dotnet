@@ -2,7 +2,7 @@
 using Selenium.Spotfire.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Selenium.Spotfire.TestHelpers.Tests
+namespace Selenium.Spotfire.Tests
 {
     [TestClass]
     public class MultipleAssertsTest

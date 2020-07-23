@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Spotfire.TestHelpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Spotfire.MSTest", "Selenium.Spotfire.MSTest\Selenium.Spotfire.MSTest.csproj", "{FE19B66A-AB38-425C-8181-C1642F4F05A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Spotfire.MSTest.Tests", "Selenium.Spotfire.MSTest.Tests\Selenium.Spotfire.MSTest.Tests.csproj", "{87F48237-8322-4B11-B3B3-5666E379BA40}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Spotfire.TestHelpers.Tests", "Selenium.Spotfire.TestHelpers.Tests\Selenium.Spotfire.TestHelpers.Tests.csproj", "{57918D7F-7A52-406B-AB1B-1FB91D9B3431}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Spotfire.Tests", "Selenium.Spotfire.Tests\Selenium.Spotfire.Tests.csproj", "{68AF22B9-F967-4A55-9051-5A13F810EC50}"
 EndProject
 Global

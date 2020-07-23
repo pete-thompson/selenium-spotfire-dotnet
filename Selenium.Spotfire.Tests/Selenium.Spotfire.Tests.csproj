@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Selenium.Spotfire.MSTest\Selenium.Spotfire.MSTest.csproj" />
     <ProjectReference Include="..\Selenium.Spotfire.TestHelpers\Selenium.Spotfire.TestHelpers.csproj" />
     <ProjectReference Include="..\Selenium.Spotfire\Selenium.Spotfire.csproj" />
   </ItemGroup>

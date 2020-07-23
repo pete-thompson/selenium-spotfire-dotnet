@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
 
-namespace Selenium.Spotfire.TestHelpers.Tests
+namespace Selenium.Spotfire.Tests
 {
     [TestClass]
     public class CompareUtilitiesTest

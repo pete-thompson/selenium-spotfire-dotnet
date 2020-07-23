@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 
-namespace Selenium.Spotfire.MSTest.Tests
+namespace Selenium.Spotfire.Tests
 {
     // Wrap a regular test context so that we can intercept lines written and files added and check that they are as expected
     internal class TestingTestContext : TestContext

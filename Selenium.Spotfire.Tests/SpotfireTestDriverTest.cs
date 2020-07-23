@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Selenium.Spotfire.TestHelpers;
 
-namespace Selenium.Spotfire.MSTest.Tests
+namespace Selenium.Spotfire.Tests
 {
     [TestClass]
     public class SpotfireTestDriverTest
