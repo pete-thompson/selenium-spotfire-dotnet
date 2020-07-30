@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using Selenium.Spotfire.MSTest;
 using Selenium.Spotfire.TestHelpers;
 using System.IO;
 using System.Reflection;
 using OpenQA.Selenium;
 using System.Threading;
-using System.Text.RegularExpressions;
 
 namespace Selenium.Spotfire.Tests
 {
@@ -20,29 +20,8 @@ namespace Selenium.Spotfire.Tests
     {
         public TestContext TestContext { get; set; }
 
-        private SpotfireDriver[] Spotfires;
+        private SpotfireTestDriver[] Spotfires;
 
-        private string[] SpotfireServerUrls
-        {
-            get
-            {
-                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireServerURL")).Select(i => i.Value.ToString()).ToArray();
-            }
-        }
-        private string[] SpotfireUsernames
-        {
-            get
-            {
-                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireUsername")).Select(i => i.Value.ToString()).ToArray();
-            }
-        }
-        private string[] SpotfirePasswords
-        {
-            get
-            {
-                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfirePassword")).Select(i => i.Value.ToString()).ToArray();
-            }
-        }
         private string TestFile
         {
             get
@@ -67,20 +46,15 @@ namespace Selenium.Spotfire.Tests
                 SpotfireDriver.GetChromeDriver();
             }
 
-            Spotfires = new SpotfireDriver[SpotfireServerUrls.Length];
-            int counter = 0;
-            foreach (string URL in SpotfireServerUrls)
+            int configuredCount = SpotfireTestDriver.ContextConfigurationCount(TestContext);
+            Spotfires = new SpotfireTestDriver[configuredCount];
+            for(int counter = 0; counter<configuredCount; counter++)
             {
-                Spotfires[counter] = SpotfireDriver.GetDriverForSpotfire<SpotfireDriver>((TestContext.Properties["ChromeHeadless"] ?? "").ToString().Length > 0,
-                                                                                         (TestContext.Properties["IncludeChromeLogs"] ?? "").ToString().Length>0);
+                Spotfires[counter] = SpotfireTestDriver.GetDriverForSpotfire(TestContext);
                 Spotfires[counter].OutputToConsole = true;
+                Spotfires[counter].ConfigureFromContext(counter+1);
 
-                if (SpotfireUsernames.Count()>counter)
-                {
-                    Spotfires[counter].SetCredentials(SpotfireUsernames[counter], SpotfirePasswords[counter]);
-                }
-
-                Spotfires[counter].OpenSpotfireAnalysis(URL, TestFile);
+                Spotfires[counter].OpenSpotfireAnalysis(TestFile);
 
                 counter++;
             }

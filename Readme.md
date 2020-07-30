@@ -63,7 +63,8 @@ Both driver classes implement the Disposeable pattern to help ensure that Chrome
 using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire())
 {
     // Open a file from Spotfire
-    spotfire.OpenSpotfireAnalysis("https://SpotfireServer", "/path to the file");
+    spotfire.SetServerUrl("https://SpotfireServer");
+    spotfire.OpenSpotfireAnalysis("/path to the file");
     IReadOnlyCollection<string> pages = spotfire.GetPages();
 
     // Move to the first page
@@ -74,6 +75,7 @@ using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire())
 The general pattern for using the driver classes is:
 
 * Create a driver using the GetDriverForSpotfire method.
+* Set the Server URL (and optionally any credentials)
 * Open a Spotfire analysis.
 * Interact with the analysis.
 * Dispose of the driver.
@@ -162,6 +164,15 @@ Chrome will automatically pick up the logged in user. If you're using Linux, use
 spotfire.SetCredentials("username", "Password");
 ```
 
+### Setting the server URL
+
+The driver needs to be assigned to a specific Spotfire server URL.
+
+```c#
+// Set the server URL
+spotfire.SetServerUrl("https://SpotfireServer");
+```
+
 ### Opening a Spotfire analytic
 
 Each driver can open a single analytic. If you want to run multiple simultaneously you'll need to instantiate multiple
@@ -170,16 +181,16 @@ servers simultaneously and comparing the results).
 
 ```c#
 // Open an analytic
-spotfire.OpenSpotfireAnalysis("https://SpotfireServer", "/path to the file");
+spotfire.OpenSpotfireAnalysis("/path to the file");
 
 // Open an analytic passing a configuration block
-spotfire.OpenSpotfireAnalysis("https://SpotfireServer", "/path to the file", configuationBlock: "some config block");
+spotfire.OpenSpotfireAnalysis("/path to the file", configuationBlock: "some config block");
 
 // Open an analytic, but don't wait for it to open
-spotfire.OpenSpotfireAnalysis("https://SpotfireServer", "/path to the file", waitForCompletion: false);
+spotfire.OpenSpotfireAnalysis("/path to the file", waitForCompletion: false);
 
 // Open an analytic and wait up to 5 minutes for it to be ready (default is 2 minutes)
-spotfire.OpenSpotfireAnalysis("https://SpotfireServer", "/path to the file", timeoutInSeconds: 600);
+spotfire.OpenSpotfireAnalysis("/path to the file", timeoutInSeconds: 600);
 ```
 
 ### Waiting for Spotfire
@@ -438,11 +449,12 @@ private void WriteOutTable(TableData table)
 
 ### Obtaining a driver
 
-The GetDriverForSpotfire method will set whether Chrome is used 'headless' or not (i.e. without a visible window) based
-on the presence of the "ChromeHeadless" property in the test context. This allows configuration of the headless property
-in the .runSettings file.
+The GetDriverForSpotfire method reads settings from the test context to control certain behaviours:
+* "ChromeHeadless" property controls if Chrome is used 'headless' or not (i.e. without a visible window)
+* "IncludeChromeLogs" property enables the capture of logs from Chrome.
+* "DownloadChromeDriver" property controls whether the ChromeDriver is downloaded automatically.
 
-Similarly, the presence of a value for "IncludeChromeLogs" in the test context will enable the capture of logs from Chrome.
+In each case, if the property is found to have a value in the test context it will enable the associated feature.
 
 ```c#
 // Open Spotfire
@@ -451,8 +463,7 @@ using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(tes
 }
 ```
 
-
-Run settings to show the Chrome window:
+Example run settings file to show the Chrome window and download the ChromeDriver:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -460,34 +471,53 @@ Run settings to show the Chrome window:
   <TestRunParameters>
   	<Parameter name="ChromeHeadless" value="" />
   	<Parameter name="IncludeChromeLogs" value="" />
+  	<Parameter name="DownloadChromeDriver" value="true" />
 ...
   <TestRunParameters> 
 ...
 <RunSettings>
 ```
 
-Run settings for headless:
+Run settings for headless and capture Chrome logs:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
   <TestRunParameters>
   	<Parameter name="ChromeHeadless" value="headless" />
-  	<Parameter name="IncludeChromeLogs" value="" />
+  	<Parameter name="IncludeChromeLogs" value="logs" />
+  	<Parameter name="DownloadChromeDriver" value="" />
 ...
   <TestRunParameters>
 ...
 <RunSettings>
 ```
 
-Run settings for capturing Chrome logs:
+### Configuring URLs and credentials in run settings
+
+The driver can also read Spotfire server URLs, usernames and passwords from the run settings file.
+
+```c#
+# Check how many URLs are configured
+int configuredCount = SpotfireTestDriver.ContextConfigurationCount(TestContext);
+
+# Configure based on SpotfireServerURL1, SpotfireUsername1 and SpotfirePassword1 properties
+spotfire.ConfigureFromContext(1);
+```
+
+Example Run Settings including 2 server configurations:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
   <TestRunParameters>
-  	<Parameter name="ChromeHeadless" value="" />
-  	<Parameter name="IncludeChromeLogs" value="logs" />
+...
+    <Parameter name="SpotfireServerURL1" value="https://SpotfireServer" /> 
+    <Parameter name="SpotfireUsername1" value="username" />
+    <Parameter name="SpotfirePassword1" value="password" />
+    <Parameter name="SpotfireServerURL2" value="https://SpotfireServer2" /> 
+    <Parameter name="SpotfireUsername2" value="username2" />
+    <Parameter name="SpotfirePassword2" value="password2" />
 ...
   <TestRunParameters>
 ...

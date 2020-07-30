@@ -339,26 +339,30 @@ namespace Selenium.Spotfire
         }
 
         /// <summary>
+        /// Set the URL to use for the Spotfire server
+        /// </summary>
+        /// <param name="serverUrl">The URL to the server</param>
+        public void SetServerUrl(string serverUrl) 
+        {
+            ServerURL = serverUrl;
+        }
+
+        /// <summary>
         /// Open a Spotfire analysis and wait for it to fully open
         /// </summary>
-        /// <param name="driver">The Selenium WebDriver</param>
-        /// <param name="testContext">The test context object</param>
-        /// <param name="serverUrl">The URL to the server (e.g. https://us-spotfire.solutions.iqvia.com</param>
         /// <param name="filePath">The path to the Spotfire analysis file</param>
         /// <param name="configurationBlock">The configuration block to pass to Spotfire</param>
         /// <param name="waitForCompletion">Whether to wait for the report to finish opening or not</param>
         /// <param name="timeoutInSeconds">How long to wait before throwing a timeout error</param>
-        public void OpenSpotfireAnalysis(string serverUrl, string filePath, string configurationBlock = "", bool waitForCompletion = true, int timeoutInSeconds = 120)
+        public void OpenSpotfireAnalysis(string filePath, string configurationBlock = "", bool waitForCompletion = true, int timeoutInSeconds = 120)
         {
-            ServerURL = serverUrl;
-
-            OutputStatusMessage(String.Format("Opening Spotfire analysis from server {0}. Path {1}. Configuration Block: {2}", serverUrl, filePath, configurationBlock));
+            OutputStatusMessage(String.Format("Opening Spotfire analysis from server {0}. Path {1}. Configuration Block: {2}", ServerURL, filePath, configurationBlock));
 
             EnsureWrapperLoaded();
 
             const string OpenScript = "SpotfireTestWrapper.startSpotfire(arguments[0],arguments[1],arguments[2]);";
 
-            ((IJavaScriptExecutor)this).ExecuteScript(OpenScript, serverUrl, filePath, configurationBlock);
+            ((IJavaScriptExecutor)this).ExecuteScript(OpenScript, ServerURL, filePath, configurationBlock);
 
             if (waitForCompletion)
             {

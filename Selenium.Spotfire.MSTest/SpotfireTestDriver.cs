@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Selenium.Spotfire;
 
 namespace Selenium.Spotfire.MSTest
@@ -69,6 +70,11 @@ namespace Selenium.Spotfire.MSTest
         {
             SpotfireTestDriver driver;
 
+            if ((testContext.Properties["DownloadChromeDriver"]?? "").ToString().Length>0) 
+            {
+                SpotfireDriver.GetChromeDriver();
+            }
+
             driver = GetDriverForSpotfire<SpotfireTestDriver>((testContext.Properties["ChromeHeadless"] ?? "").ToString().Length>0,
                                                               (testContext.Properties["IncludeChromeLogs"] ?? "").ToString().Length>0);
 
@@ -87,6 +93,32 @@ namespace Selenium.Spotfire.MSTest
             driver.SetDownloadFolder(testContext.TestDir);
 
             return driver;
+        }
+
+        /// <summary>
+        /// Counts how many Spotfire serves we have configured in the TestContext
+        /// </summary>
+        public static int ContextConfigurationCount(TestContext testContext)
+        {
+            return testContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireServerURL")).Select(i => i.Value.ToString()).ToArray().Length;
+        }
+
+        /// <summary>
+        /// Read configuration from the TestContext
+        /// If available, we'll read the URL, username and password from the TestContext
+        /// </summary>
+        public void ConfigureFromContext(int serverNumber)
+        {
+            if (TestContext.Properties.Contains(string.Format("SpotfireServerURL{0}", serverNumber)))
+            {
+                SetServerUrl(TestContext.Properties[string.Format("SpotfireServerURL{0}", serverNumber)].ToString());
+                if ((TestContext.Properties.Contains(string.Format("SpotfireUsername{0}", serverNumber))) &&
+                    (TestContext.Properties.Contains(string.Format("SpotfirePassword{0}", serverNumber))))
+                {
+                    SetCredentials(TestContext.Properties[string.Format("SpotfireUsername{0}", serverNumber)].ToString(),
+                                   TestContext.Properties[string.Format("SpotfirePassword{0}", serverNumber)].ToString());
+                }
+            }
         }
 
         /// <summary>

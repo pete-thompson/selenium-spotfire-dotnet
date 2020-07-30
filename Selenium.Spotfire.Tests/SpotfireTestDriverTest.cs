@@ -13,27 +13,6 @@ namespace Selenium.Spotfire.Tests
     {
         public TestContext TestContext { get; set; }
 
-        private string[] SpotfireServerUrls
-        {
-            get
-            {
-                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireServerURL")).Select(i => i.Value.ToString()).ToArray();
-            }
-        }
-        private string[] SpotfireUsernames
-        {
-            get
-            {
-                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfireUsername")).Select(i => i.Value.ToString()).ToArray();
-            }
-        }
-        private string[] SpotfirePasswords
-        {
-            get
-            {
-                return TestContext.Properties.Cast<KeyValuePair<string, object>>().Where(i => i.Key.StartsWith("SpotfirePassword")).Select(i => i.Value.ToString()).ToArray();
-            }
-        }
         private string TestFile
         {
             get
@@ -51,14 +30,11 @@ namespace Selenium.Spotfire.Tests
             using (SpotfireTestDriver spotfire1 = SpotfireTestDriver.GetDriverForSpotfire(context))
             using (SpotfireTestDriver spotfire2 = SpotfireTestDriver.GetDriverForSpotfire(context))
             {
-                if (SpotfireUsernames.Count()>0)
-                {
-                    spotfire1.SetCredentials(SpotfireUsernames[0], SpotfirePasswords[0]);
-                    spotfire2.SetCredentials(SpotfireUsernames[0], SpotfirePasswords[0]);
-                }
-                spotfire1.OpenSpotfireAnalysis(SpotfireServerUrls[0], TestFile);
+                spotfire1.ConfigureFromContext(1);
+                spotfire1.ConfigureFromContext(1);
+                spotfire1.OpenSpotfireAnalysis(TestFile);
                 spotfire1.CaptureScreenShot("example");
-                spotfire2.OpenSpotfireAnalysis(SpotfireServerUrls[0], TestFile);
+                spotfire2.OpenSpotfireAnalysis(TestFile);
                 spotfire2.CaptureScreenShot("example");
             }
 
@@ -79,11 +55,8 @@ namespace Selenium.Spotfire.Tests
             TestingTestContext context = new TestingTestContext(TestContext);
             using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(context))
             {
-                if (SpotfireUsernames.Count()>0)
-                {
-                    spotfire.SetCredentials(SpotfireUsernames[0], SpotfirePasswords[0]);
-                }
-                spotfire.OpenSpotfireAnalysis(SpotfireServerUrls[0], TestFile);
+                spotfire.ConfigureFromContext(1);
+                spotfire.OpenSpotfireAnalysis(TestFile);
                 spotfire.CaptureScreenShot("example");
                 context.ThrowErrorOnAddResult = true;
             }
@@ -111,11 +84,8 @@ namespace Selenium.Spotfire.Tests
             TestingTestContext context = new TestingTestContext(TestContext);
             using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(context))
             {
-                if (SpotfireUsernames.Count()>0)
-                {
-                    spotfire.SetCredentials(SpotfireUsernames[0], SpotfirePasswords[0]);
-                }
-                spotfire.OpenSpotfireAnalysis(SpotfireServerUrls[0], TestFile);
+                spotfire.ConfigureFromContext(1);
+                spotfire.OpenSpotfireAnalysis(TestFile);
             }
             Assert.AreNotEqual(0, context.Lines.Count);
         }
