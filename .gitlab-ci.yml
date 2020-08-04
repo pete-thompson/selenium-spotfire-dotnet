@@ -23,15 +23,17 @@ test:
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
       dotnet test "--settings:$runSettings" --results-directory ./test-results --logger:console --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput='../artifacts/cobertura-coverage.xml'
+      dotnet tool install -g dotnet-reportgenerator-globaltool
+      report-generator "-reports:./artifacts/cobertura-coverage.xml" "-targetDir:./artifacts/coveragereport" -reportTypes:html
   artifacts:
     when: always
     paths: 
     - ./**/test-results
     - ./**/*test-result.xml
+    - ./artifacts/coveragereport
     reports:
       junit:
         - ./**/*test-result.xml
-      cobertura: ./**/cobertura-coverage.xml
 
 # Publish stage has to run on our specific runner because
 # - nuget signing isn't supported on Linux (so we can't use Docker)
