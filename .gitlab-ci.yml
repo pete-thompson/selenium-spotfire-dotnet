@@ -23,6 +23,8 @@ test:
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
       dotnet test "--settings:$runSettings" --results-directory ./test-results --logger:console --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput='../artifacts/cobertura-coverage.xml'
+  after_script:
+    - |
       dotnet tool install -g dotnet-reportgenerator-globaltool
       export PATH="$PATH:/root/.dotnet/tools"
       reportgenerator "-reports:./artifacts/cobertura-coverage.xml" "-targetDir:./artifacts/coveragereport" -reportTypes:html
