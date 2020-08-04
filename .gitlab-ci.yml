@@ -22,7 +22,7 @@ test:
       kinit $KerberosUsername <<< $KerberosPassword
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
-      dotnet test "--settings:$runSettings" --results-directory ./test-results --logger:console --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+      dotnet test "--settings:$runSettings" --results-directory ./test-results --logger:console --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput='../artifacts/cobertura-coverage.xml'
   artifacts:
     when: always
     paths: 
@@ -31,6 +31,7 @@ test:
     reports:
       junit:
         - ./**/*test-result.xml
+      cobertura: ./**/cobertura-coverage.xml
 
 # Publish stage has to run on our specific runner because
 # - nuget signing isn't supported on Linux (so we can't use Docker)
