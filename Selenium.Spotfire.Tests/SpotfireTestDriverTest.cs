@@ -31,7 +31,7 @@ namespace Selenium.Spotfire.Tests
             using (SpotfireTestDriver spotfire2 = SpotfireTestDriver.GetDriverForSpotfire(context))
             {
                 spotfire1.ConfigureFromContext(1);
-                spotfire1.ConfigureFromContext(1);
+                spotfire2.ConfigureFromContext(1);
                 spotfire1.OpenSpotfireAnalysis(TestFile);
                 spotfire1.CaptureScreenShot("example");
                 spotfire2.OpenSpotfireAnalysis(TestFile);
