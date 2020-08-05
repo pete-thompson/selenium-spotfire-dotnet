@@ -4,7 +4,8 @@
     },
     "dotnet-test-explorer.testArguments": "--settings:./outsideDocker.runSettings",
     "terminal.integrated.env.windows": {
-        "images_folder": "${workspaceFolder}/test-resources/images"
+        "images_folder": "${workspaceFolder}/test-resources/images",
+        "datafiles_folder": "${workspaceFolder}/test-resources/datafiles"
     }
 //    "dotnet-test-explorer.settingsFile": "./outsideDocker.runSettings",
 }

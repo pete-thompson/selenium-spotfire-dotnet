@@ -256,155 +256,85 @@ namespace Selenium.Spotfire.Tests
         public void VisualTests()
         {
             MultipleAsserts checks = new MultipleAsserts();
-
-            var expectedVisuals = new List<Tuple<string, List<Tuple<string, string, bool>>>>()
+            var expectedPages = new List<ExpectedPage>()
             {
-                Tuple.Create(
-                    "Tables",
-                    new List<Tuple<string, string, bool>>()
-                    {
-                        Tuple.Create("Summary table", "tabular", true),
-                        Tuple.Create("Graphical table", "tabular", true),
-                        Tuple.Create("Cross table", "tabular", true),
-                        Tuple.Create("Table", "tabular", true)
+                new ExpectedPage()
+                {
+                    Title = "Tables",
+                    Visuals = new List<ExpectedVisual>() {
+                        new ExpectedVisual() { Title = "Summary table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Graphical table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Cross table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true }
                     }
-                ),
-                Tuple.Create(
-                    "Charts",
-                    new List<Tuple<string, string, bool>>()
+                },
+                new ExpectedPage()
+                {
+                    Title = "Charts",
+                    Visuals = new List<ExpectedVisual>()
                     {
-                        Tuple.Create("Waterfall", "image", true),
-                        Tuple.Create("Line", "image", true),
-                        Tuple.Create("Bar", "image", true),
-                        Tuple.Create("Pie", "image", true),
-                        Tuple.Create("Combination", "image", true),
-                        Tuple.Create("Scatter", "image", true)
+                        new ExpectedVisual() { Title = "Waterfall", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Line", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Bar", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Pie", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Combination", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Scatter", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
                     }
-                ),
-                Tuple.Create(
-                    "More charts",
-                    new List<Tuple<string, string, bool>>()
+                },
+                new ExpectedPage()
+                {
+                    Title = "More charts",
+                    Visuals = new List<ExpectedVisual>()
                     {
-                        Tuple.Create("KPI Chart", "image", true),
-                        Tuple.Create("Parallel Coordinate Plot", "image", true),
-                        Tuple.Create("Heat map", "image", true),
-                        Tuple.Create("Tree", "image", true),
-                        Tuple.Create("Box Plot", "image", true)
+                        new ExpectedVisual() { Title = "KPI Chart", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Parallel Coordinate Plot", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Heat map", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Tree", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                        new ExpectedVisual() { Title = "Box Plot", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
                     }
-                ),
-                Tuple.Create(
-                    "Map",
-                    new List<Tuple<string, string, bool>>()
+                },
+                new ExpectedPage()
+                {
+                    Title = "Map",
+                    Visuals = new List<ExpectedVisual>()
                     {
-                        Tuple.Create("Map Chart", "image", true)
+                        new ExpectedVisual() { Title = "Map Chart", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
                     }
-                ),
-                Tuple.Create(
-                    "Text + web",
-                    new List<Tuple<string, string, bool>>()
+                },
+                new ExpectedPage()
+                {
+                    Title = "Text + web",
+                    Visuals = new List<ExpectedVisual>()
                     {
-                        Tuple.Create("Text Area", "textual", true),
-                        Tuple.Create("JavaScript Visualization", "image", true)
+                        new ExpectedVisual() { Title = "Text Area", VisualType = ExpectedVisual.Type.Textual, CanMaximize = true },
+                        new ExpectedVisual() { Title = "JavaScript Visualization", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
                     }
-                ),
-                Tuple.Create(
-                    "No title, maximize or export",
-                    new List<Tuple<string, string, bool>>()
+                },
+                new ExpectedPage() {
+                    Title = "No title, maximize or export",
+                    Visuals = new List<ExpectedVisual>()
                     {
-                        Tuple.Create("", "tabular", false)
+                        new ExpectedVisual() { Title = "", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = false }
                     }
-                )
+                }
             };
 
             int spotfireInstanceCount = 0;
 
-            foreach (SpotfireDriver spotfire in Spotfires)
+            foreach (SpotfireTestDriver spotfire in Spotfires)
             {
-                IReadOnlyCollection<string> pages = spotfire.GetPages();
-                checks.CheckErrors(() => Assert.AreEqual(expectedVisuals.Count, pages.Count, "Mismatching number of pages, instance {0}", spotfireInstanceCount));
+                // Use the test helper to check for expected images etc.
+                spotfire.TestAnalysisContents(expectedPages, checks);
 
-                foreach (Tuple<string, List<Tuple<string, string, bool>>> page in expectedVisuals)
-                {
-                    if (!pages.Contains(page.Item1))
-                    {
-                        checks.CheckErrors(() => Assert.Fail("Page {0} is missing, instance {1}", page.Item1, spotfireInstanceCount));
-                    }
-                    else
-                    {
-                        spotfire.SetActivePage(page.Item1, 60);
-                        spotfire.RestoreVisualLayout();
-
-                        List<Visual> visuals = spotfire.GetVisuals();
-                        checks.CheckErrors(() => Assert.AreEqual(page.Item2.Count, visuals.Count, "Mismatching number of visuals on page {0} instance {1}", page.Item1, spotfireInstanceCount));
-
-                        for (int visualNumber = 0; visualNumber < visuals.Count && visualNumber < page.Item2.Count; visualNumber++)
-                        {
-                            Visual visual = visuals[visualNumber];
-                            Tuple<string, string, bool> expectedVisual = page.Item2[visualNumber];
-
-                            TestContext.WriteLine("Page {0}, visual number {1}, title {2}", page.Item1, visualNumber, visual.Title);
-
-                            checks.CheckErrors(() => Assert.AreEqual(expectedVisual.Item1, visual.Title, "Visual title did not match expected value. Page {0}, visual number {1}, instance {2}", page.Item1, visualNumber, spotfireInstanceCount));
-#pragma warning disable S3358 // Ternary operators should not be nested
-                            string actualType = visual.IsTextType ? "textual" : (visual.IsImageType ? "image" : "tabular");
-#pragma warning restore S3358 // Ternary operators should not be nested
-                            checks.CheckErrors(() => Assert.AreEqual(expectedVisual.Item2, actualType, "Visual type did not match expected value. Page {0}, visual number {1}, instance {2}", page.Item1, visualNumber, spotfireInstanceCount));
-                            checks.CheckErrors(() => Assert.AreEqual(expectedVisual.Item3, visual.CanMaximize(), "CanMaximize  did not match expected value. Page {0}, visual number {1}, instance {2}", page.Item1, visualNumber, spotfireInstanceCount));
-
-                            if (visual.IsTextType)
-                            {
-                                string expectedDataPath = Path.Combine(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataFiles"), string.Format("ExpectedText-{0}-{1}.txt", page.Item1, visual.Title));
-                                // Files are created on Windows system but might be used for tests run under Linux
-                                string expected = File.ReadAllText(expectedDataPath).Replace("\r\n", Environment.NewLine);
-                                TestContext.WriteLine(string.Format("Text visual, content: {0}", visual.Text));
-                                checks.CheckErrors(() => Assert.AreEqual(expected, visual.Text, "Text for visual {0} on page {1} for instance {2} does not match expected.", visual.Title, page.Item1, spotfireInstanceCount));
-                            }
-                            else if (visual.IsImageType)
-                            {
-                                TestContext.WriteLine(string.Format("Image visual, content size: ({0},{1})", visual.Content.Size.Width, visual.Content.Size.Height));
-
-                                // Test resizing
-                                Size current = visual.Content.Size;
-                                Size shrink = new Size(current.Width / 2, current.Height / 2);
-                                visual.ResizeContent(shrink);
-                                checks.CheckErrors(() => Assert.AreEqual(shrink, visual.Content.Size, "Resizing visual {0} failed", visual.Title));
-                                visual.ResizeContent(current);
-                                checks.CheckErrors(() => Assert.AreEqual(current, visual.Content.Size, "Resizing visual {0} failed", visual.Title));
-
-                                Dictionary<string, Bitmap> imageComparisons = new Dictionary<string, Bitmap>();
-
-                                bool anyMatch = VisualCompare.CompareVisualImages(visual, Environment.GetEnvironmentVariable("images_folder"),string.Format("{0}-{1}-{2}-{3}", TestContext.FullyQualifiedTestClassName, TestContext.TestName, page.Item1, visual.Title),imageComparisons);
-
-                                // If there's no match we need to write out the mismatches
-                                if (!anyMatch)
-                                {
-                                    TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
-                                    string instancePrefix = (spotfireInstanceCount > 0) ? spotfireInstanceCount.ToString("000") + "-" : "";
-                                    foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
-                                    {
-                                        string filename = Path.Combine(TestContext.TestDir, instancePrefix + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + "-" + imageToSave.Key);
-                                        imageToSave.Value.Save(filename);
-                                        this.TestContext.AddResultFile(filename);
-                                    }
-                                }
-                                checks.CheckErrors(() => Assert.IsTrue(anyMatch, "Image for visual {0} on page {1} for instance {2} does not match a possible expected image", visual.Title, page.Item1, spotfireInstanceCount));
-                            }
-                            else if (visual.IsTabularType)
-                            {
-                                string expectedDataPath = Path.Combine(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataFiles"), string.Format("ExpectedData-{0}-{1}.txt", page.Item1, visual.Title));
-                                using (TableData data = visual.GetTableData())
-                                using (TableData expectedData = new TableDataFromDelimitedFile(expectedDataPath))
-                                {
-                                    TestContext.WriteLine(string.Format("Tabular data, {0} columns", data.Columns.Length));
-                                    checks.CheckErrors(() => Assert.IsTrue(CompareUtilities.AreEqual(expectedData, data), "Data for visual {0} on page {1} for instance {2} does not match expected data", visual.Title, page.Item1, spotfireInstanceCount));
-                                    string path = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + spotfireInstanceCount.ToString("000") + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".txt";
-                                    data.SaveToFile(path);
-                                    this.TestContext.AddResultFile(path);
-                                }
-                            }
-                        }
-                    }
-                }
+                // Test resizing
+                spotfire.SetActivePage("Charts");
+                List<Visual> visuals = spotfire.GetVisuals();
+                Size current = visuals.First().Content.Size;
+                Size shrink = new Size(current.Width / 2, current.Height / 2);
+                visuals.First().ResizeContent(shrink);
+                checks.CheckErrors(() => Assert.AreEqual(shrink, visuals.First().Content.Size, "Resizing visual {0} failed", visuals.First().Title));
+                visuals.First().ResizeContent(current);
+                checks.CheckErrors(() => Assert.AreEqual(current, visuals.First().Content.Size, "Resizing visual {0} failed", visuals.First().Title));
 
                 try
                 {
@@ -497,7 +427,7 @@ namespace Selenium.Spotfire.Tests
             };
 
             var expectedMarkings = new string[] { "Marking" };
-            string testFileFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataFiles");
+            string testFileFolder = Environment.GetEnvironmentVariable("datafiles_folder");
 
             foreach (SpotfireDriver spotfire in Spotfires)
             {

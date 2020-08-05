@@ -267,3 +267,4 @@ __pycache__/
 **/*test-results.xml
 **/test-results/
 *.runSettings
+**/coverage.cobertura.xml

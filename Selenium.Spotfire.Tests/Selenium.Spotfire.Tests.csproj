@@ -36,37 +36,4 @@
     <ProjectReference Include="..\Selenium.Spotfire\Selenium.Spotfire.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="DataFiles\EmptyDataFile.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedData-No title, maximize or export-.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedData-Tables-Cross table.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedData-Tables-Graphical table.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedData-Tables-Summary table.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedData-Tables-Table.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedMarkingDataTable.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedMarkingWorldCountries.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\ExpectedText-Text + web-Text Area.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataFiles\SimpleDataFile.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

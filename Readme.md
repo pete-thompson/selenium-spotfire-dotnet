@@ -498,10 +498,10 @@ Run settings for headless and capture Chrome logs:
 The driver can also read Spotfire server URLs, usernames and passwords from the run settings file.
 
 ```c#
-# Check how many URLs are configured
+// Check how many URLs are configured
 int configuredCount = SpotfireTestDriver.ContextConfigurationCount(TestContext);
 
-# Configure based on SpotfireServerURL1, SpotfireUsername1 and SpotfirePassword1 properties
+// Configure based on SpotfireServerURL1, SpotfireUsername1 and SpotfirePassword1 properties
 spotfire.ConfigureFromContext(1);
 ```
 
@@ -540,6 +540,91 @@ spotfire.CaptureScreenshot("First step");
 
 All debug messages from the driver are automatically logged to the Test Context using WriteLine and will appear
 in the test results.
+
+### All-inclusive analysis file test
+
+A very common test pattern is to open a file and check the contents against expected images and/or text files (on the assumption that the content of the analysis is static and that the data doesn't vary).
+The MSTest driver includes a method to perform such a test - simply supply a list of expected pages, with expected visuals, along with a 
+set of files that contain acceptable images and the test will do the rest.
+
+```c#
+namespace Tests
+{
+    [TestClass]
+    public class TestClass
+    {
+        public TestContext testContext { get; set; }
+
+        public void VisualTests()
+        {
+            MultipleAsserts checks = new MultipleAsserts();
+            var expectedPages = new List<ExpectedPage>()
+            {
+                new ExpectedPage()
+                {
+                    Title = "First page",
+                    Visuals = new List<ExpectedVisual>() {
+                        new ExpectedVisual() { Title = "A table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
+                        new ExpectedVisual() { Title = "A Line", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
+                    }
+                },
+                new ExpectedPage()
+                {
+                    Title = "Second page",
+                    Visuals = new List<ExpectedVisual>()
+                    {
+                        new ExpectedVisual() { Title = "KPI Chart", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
+                    },
+                    IgnoreExtraVisuals = true
+                }
+            };
+
+            using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(testContext))
+            {
+                spotfire.OpenSpotfireAnalysis("/path to the file");
+
+                // Configure based on SpotfireServerURL1, SpotfireUsername1 and SpotfirePassword1 properties
+                spotfire.ConfigureFromContext(1);
+
+                // Use the test helper to check for expected images etc.
+                spotfire.TestAnalysisContents(expectedPages, checks);
+            }
+
+            checks.AssertEmpty();
+        }
+    }
+}
+```
+
+The ```TestAnalysisContents``` method will perform the following checks:
+* That all expected pages are present.
+* If the IgnoreExtraPages parameter controls whether a check for extra pages is performed.
+* On each page, check that all expected Visuals are present.
+* The IgnoreExtraVisuals property controls whether a check for extra visuals is performed.
+* For each visual, the type is checked.
+* For image visuals, the image is compared against files found in the images folder (an optional parameter which defaults to the images_folder environment variable). 
+The file names match the pattern "\<test-class-name\>-\<test-method-name\>-\<page title\>-\<visual title\>-\*.png".
+In the above example we'd look for files named "Tests.TestClass-VisualTests-First page-A line-\*.png"
+* If no matching image is found, files are added to the test results containing the actual visual 
+image, along with comparison images against each of the allowed possible images.
+* For text and tabular visuals, the contents are compared against files found in the datafiles folder (an optional parameter which defaults to the datafiles_folder environment variable).
+The file name for comparison is match the pattern "\<test-class-name\>-\<test-method-name\>-\<page title\>-\<visual title\>.txt.
+In the above example we'd look for a file named "Tests.TestClass-VisualTests-First page-A table.txt".
+* Text and tabular values are captured as files in the test results.
+
+The net result of this process is that the test results can be used to create files to be used in future tests - if image comparisons fail, a new allowed image can be found in the test results (assuming that the image should be allowed and that the test didn't actually fail).
+
+### Test context filename generation
+
+The driver generates files to attach to the test context using a common filename format, which is made available by the 
+```ResultFilePath``` method:
+
+```c#
+string path = ResultFilePath("my file.txt");
+testContext.AddResultFile(path);
+```
+
+The path includes the test results folder, the test class, the test name and the suffix provided by the caller.
 
 ## Test helpers
 

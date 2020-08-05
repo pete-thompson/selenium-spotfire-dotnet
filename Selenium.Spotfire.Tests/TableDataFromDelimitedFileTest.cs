@@ -1,5 +1,6 @@
 ﻿using Selenium.Spotfire;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -13,7 +14,7 @@ namespace Selenium.Spotfire.Tests
         [TestMethod]
         public void EmptyFile()
         {
-            string testFile = Path.Combine(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataFiles"), "EmptyDataFile.txt");
+            string testFile = Path.Combine(Environment.GetEnvironmentVariable("datafiles_folder"), "EmptyDataFile.txt");
             using (TableDataFromDelimitedFile table = new Spotfire.TableDataFromDelimitedFile(testFile))
             {
                 Assert.AreEqual(0, table.Columns.Length);
@@ -24,7 +25,7 @@ namespace Selenium.Spotfire.Tests
         [TestMethod]
         public void SimpleFile()
         {
-            string testFile = Path.Combine(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataFiles"), "SimpleDataFile.txt");
+            string testFile = Path.Combine(Environment.GetEnvironmentVariable("datafiles_folder"), "SimpleDataFile.txt");
             using (TableDataFromDelimitedFile table = new Spotfire.TableDataFromDelimitedFile(testFile))
             {
                 Assert.AreEqual("column1", table.Columns[0]);

@@ -41,10 +41,10 @@ namespace Selenium.Spotfire.Tests
             // Check that we have the expected output files
             checks.CheckErrors( () => Assert.AreEqual(4, context.ResultFileNames.Count));
             string baseFilename = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName;
-            checks.CheckErrors(() => Assert.AreEqual(baseFilename + "-00000-00000-example.png", context.ResultFileNames[0]));
+            checks.CheckErrors(() => Assert.AreEqual(baseFilename + "-00000-example.png", context.ResultFileNames[0]));
             checks.CheckErrors(() => Assert.AreEqual(baseFilename + "-00001-00000-example.png", context.ResultFileNames[1]));
             checks.CheckErrors(() => Assert.AreEqual(baseFilename + "-00001-00001-Final.png", context.ResultFileNames[2]));
-            checks.CheckErrors(() => Assert.AreEqual(baseFilename + "-00000-00001-Final.png", context.ResultFileNames[3]));
+            checks.CheckErrors(() => Assert.AreEqual(baseFilename + "-00001-Final.png", context.ResultFileNames[3]));
 
             checks.AssertEmpty();
         }
@@ -64,7 +64,7 @@ namespace Selenium.Spotfire.Tests
             // Check that we have the expected output file
             Assert.AreEqual(1, context.ResultFileNames.Count);
             string baseFilename = TestContext.TestDir + Path.DirectorySeparatorChar + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName;
-            Assert.AreEqual(baseFilename + "-00000-00000-example.png", context.ResultFileNames[0]);
+            Assert.AreEqual(baseFilename + "-00000-example.png", context.ResultFileNames[0]);
         }
 
         [TestMethod]
