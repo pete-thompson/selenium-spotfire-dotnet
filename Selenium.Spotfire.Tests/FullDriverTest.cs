@@ -371,12 +371,6 @@ namespace Selenium.Spotfire.Tests
                                 visual.ResizeContent(current);
                                 checks.CheckErrors(() => Assert.AreEqual(current, visual.Content.Size, "Resizing visual {0} failed", visual.Title));
 
-                                Bitmap image = visual.GetImage();
-                                string instancePrefix = (spotfireInstanceCount > 0) ? spotfireInstanceCount.ToString("000") + "-" : "";
-                                string path = TestContext.TestDir + Path.DirectorySeparatorChar + instancePrefix + TestContext.FullyQualifiedTestClassName + "-"+ TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + ".png";
-                                image.Save(path);
-                                this.TestContext.AddResultFile(path);
-
                                 Dictionary<string, Bitmap> imageComparisons = new Dictionary<string, Bitmap>();
 
                                 bool anyMatch = VisualCompare.CompareVisualImages(visual, Environment.GetEnvironmentVariable("images_folder"),string.Format("{0}-{1}-{2}-{3}", TestContext.FullyQualifiedTestClassName, TestContext.TestName, page.Item1, visual.Title),imageComparisons);
@@ -385,6 +379,7 @@ namespace Selenium.Spotfire.Tests
                                 if (!anyMatch)
                                 {
                                     TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
+                                    string instancePrefix = (spotfireInstanceCount > 0) ? spotfireInstanceCount.ToString("000") + "-" : "";
                                     foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
                                     {
                                         string filename = Path.Combine(TestContext.TestDir, instancePrefix + TestContext.FullyQualifiedTestClassName + "-" + TestContext.TestName + "-" + page.Item1 + "-" + visual.Title + "-" + imageToSave.Key);

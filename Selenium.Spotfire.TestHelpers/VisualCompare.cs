@@ -35,6 +35,9 @@ namespace Selenium.Spotfire.TestHelpers
                     imageComparisons.Add("difference vs. " + match.Groups[1].Value + ".png", difference);
                 }
             }
+            if (!anyMatch) {
+                imageComparisons.Add(".png", visual.GetImage());
+            }
 
             return anyMatch;
         }
