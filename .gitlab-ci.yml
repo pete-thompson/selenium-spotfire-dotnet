@@ -19,7 +19,7 @@ test:
   script:
     - |
       export images_folder=$(pwd)/test-resources/images
-      export datafiless_folder=$(pwd)/test-resources/datafiles
+      export datafiles_folder=$(pwd)/test-resources/datafiles
       kinit $KerberosUsername <<< $KerberosPassword
       export DISPLAY=:20
       Xvfb :20 -screen 0 1920x1080x16 &
