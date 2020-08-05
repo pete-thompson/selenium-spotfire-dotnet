@@ -445,6 +445,40 @@ private void WriteOutTable(TableData table)
 }
 ```
 
+The ```TableDataFromDelimitedFile``` class can read data from files - the main use of which is when comparing data loaded
+from Spotfire against expected data.
+
+```c#
+string testFile = "path to text file.txt";
+using (TableDataFromDelimitedFile table = new Spotfire.TableDataFromDelimitedFile(testFile))
+{
+}
+```
+
+The ```TableDataFromColumns``` and ```TableDataFromRows``` classes provide ways to generate tabular data for comparison purposes -
+for example data could be coded direct in the test case, or downloaded from a database.
+
+```c#
+Dictionary<string, object> testData = new Dictionary<string, object>()
+{
+    { "column1" , new string[] {"column1row1", "column1row2" } },
+    { "column2", new string[] {"column2row1", "column2row2"} }
+};
+
+using (TableDataFromColumns table = new TableDataFromColumns(testData))
+{
+    // Do something with the data
+}
+
+string[] columns = { "column1", "column2" };
+var rows = new []{  new []{ "column1row1", "column2row1" }, new[] { "column1row2", "column2row2" } };
+
+using (TableDataFromRows table = new TableDataFromRows(columns, rows))
+{
+    // Do something with the data
+}
+```
+
 ## Additional features of the MSTest driver
 
 ### Obtaining a driver
