@@ -250,7 +250,7 @@ namespace Selenium.Spotfire.MSTest
                                     TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
                                     foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
                                     {
-                                        string filename = ResultFilePath(imageToSave.Key);
+                                        string filename = ResultFilePath(page.Title + "-" + visual.Title + imageToSave.Key);
                                         imageToSave.Value.Save(filename);
                                         this.TestContext.AddResultFile(filename);
                                     }
