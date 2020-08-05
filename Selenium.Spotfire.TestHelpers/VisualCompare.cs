@@ -32,7 +32,7 @@ namespace Selenium.Spotfire.TestHelpers
                 {
                     Regex pattern = new Regex(@"([^-]*)\.png$");
                     Match match = pattern.Match(filename);
-                    imageComparisons.Add("difference vs. " + match.Groups[1].Value + ".png", difference);
+                    imageComparisons.Add("- difference vs. " + match.Groups[1].Value + ".png", difference);
                 }
             }
             if (!anyMatch) {
