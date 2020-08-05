@@ -68,7 +68,7 @@ using (SpotfireDriver spotfire = SpotfireDriver.GetDriverForSpotfire())
     IReadOnlyCollection<string> pages = spotfire.GetPages();
 
     // Move to the first page
-    spotfire.SetPage(pages.ElementAt(0));
+    spotfire.SetActivePage(pages.ElementAt(0));
 }
 ```
 
