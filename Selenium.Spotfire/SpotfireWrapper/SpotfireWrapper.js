@@ -131,7 +131,7 @@
         setCredentials: function(username, password) {
             // Send the credentials to our extension
             console.log('Sending credentials to extension for user ', username)
-            window.postMessage( { type: "SET_CREDENTIALS", username: username, password: password }, "*")
+            window.postMessage( { type: "SET_CREDENTIALS", username: username, password: password }, window.location.origin)
         },
         startSpotfire: function (serverURL, file, configurationBlock) {
             // An API for starting Spotfire from a specific URL - fetches the Spotfire API and opens the file
