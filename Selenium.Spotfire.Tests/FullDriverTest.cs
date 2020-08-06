@@ -262,10 +262,10 @@ namespace Selenium.Spotfire.Tests
                 {
                     Title = "Tables",
                     Visuals = new List<ExpectedVisual>() {
-                        new ExpectedVisual() { Title = "Summary table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Graphical table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Cross table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Table", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = true }
+                        new ExpectedVisual() { Title = "Summary table", VisualType = ExpectedVisual.Type.Tabular },
+                        new ExpectedVisual() { Title = "Graphical table", VisualType = ExpectedVisual.Type.Tabular },
+                        new ExpectedVisual() { Title = "Cross table", VisualType = ExpectedVisual.Type.Tabular },
+                        new ExpectedVisual() { Title = "Table", VisualType = ExpectedVisual.Type.Tabular }
                     }
                 },
                 new ExpectedPage()
@@ -273,12 +273,12 @@ namespace Selenium.Spotfire.Tests
                     Title = "Charts",
                     Visuals = new List<ExpectedVisual>()
                     {
-                        new ExpectedVisual() { Title = "Waterfall", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Line", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Bar", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Pie", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Combination", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Scatter", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
+                        new ExpectedVisual() { Title = "Waterfall", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Line", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Bar", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Pie", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Combination", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Scatter", VisualType = ExpectedVisual.Type.Image }
                     }
                 },
                 new ExpectedPage()
@@ -286,11 +286,11 @@ namespace Selenium.Spotfire.Tests
                     Title = "More charts",
                     Visuals = new List<ExpectedVisual>()
                     {
-                        new ExpectedVisual() { Title = "KPI Chart", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Parallel Coordinate Plot", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Heat map", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Tree", VisualType = ExpectedVisual.Type.Image, CanMaximize = true },
-                        new ExpectedVisual() { Title = "Box Plot", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
+                        new ExpectedVisual() { Title = "KPI Chart", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Parallel Coordinate Plot", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Heat map", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Tree", VisualType = ExpectedVisual.Type.Image },
+                        new ExpectedVisual() { Title = "Box Plot", VisualType = ExpectedVisual.Type.Image }
                     }
                 },
                 new ExpectedPage()
@@ -298,7 +298,7 @@ namespace Selenium.Spotfire.Tests
                     Title = "Map",
                     Visuals = new List<ExpectedVisual>()
                     {
-                        new ExpectedVisual() { Title = "Map Chart", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
+                        new ExpectedVisual() { Title = "Map Chart", VisualType = ExpectedVisual.Type.Image }
                     }
                 },
                 new ExpectedPage()
@@ -306,15 +306,15 @@ namespace Selenium.Spotfire.Tests
                     Title = "Text + web",
                     Visuals = new List<ExpectedVisual>()
                     {
-                        new ExpectedVisual() { Title = "Text Area", VisualType = ExpectedVisual.Type.Textual, CanMaximize = true },
-                        new ExpectedVisual() { Title = "JavaScript Visualization", VisualType = ExpectedVisual.Type.Image, CanMaximize = true }
+                        new ExpectedVisual() { Title = "Text Area", VisualType = ExpectedVisual.Type.Textual },
+                        new ExpectedVisual() { Title = "JavaScript Visualization", VisualType = ExpectedVisual.Type.Image }
                     }
                 },
                 new ExpectedPage() {
                     Title = "No title, maximize or export",
                     Visuals = new List<ExpectedVisual>()
                     {
-                        new ExpectedVisual() { Title = "", VisualType = ExpectedVisual.Type.Tabular, CanMaximize = false }
+                        new ExpectedVisual() { Title = "", VisualType = ExpectedVisual.Type.Tabular }
                     }
                 }
             };

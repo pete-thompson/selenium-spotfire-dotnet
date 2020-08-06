@@ -11,6 +11,5 @@ namespace Selenium.Spotfire.MSTest
             Textual, Tabular, Image
         };
         public Type VisualType;
-        public bool CanMaximize;
     }
 }

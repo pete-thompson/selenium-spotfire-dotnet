@@ -218,7 +218,6 @@ namespace Selenium.Spotfire.MSTest
                             ExpectedVisual.Type actualType = visual.IsTextType ? ExpectedVisual.Type.Textual : (visual.IsImageType ? ExpectedVisual.Type.Image : ExpectedVisual.Type.Tabular);
 
                             checks.CheckErrors(() => Assert.AreEqual(expectedVisual.VisualType, actualType, "Visual type did not match expected value. Page {0}, visual {1}{2}", page.Title, expectedVisual.Title, instanceMessage));
-                            checks.CheckErrors(() => Assert.AreEqual(expectedVisual.CanMaximize, visual.CanMaximize(), "CanMaximize  did not match expected value. Page {0}, visual {1}{2}", page.Title, expectedVisual.Title, instanceMessage));
 
                             string expectedFile = string.Format("{0}-{1}-{2}-{3}", TestContext.FullyQualifiedTestClassName, TestContext.TestName, page.Title, visual.Title);
 
@@ -275,33 +274,39 @@ namespace Selenium.Spotfire.MSTest
                                 else
                                 {
                                     TestContext.WriteLine("No image files folder specified, so image comparison not performed{0}.", instanceMessage);
+                                    string filename = ResultFilePath(page.Title + "-" + visual.Title + ".png");
+                                    visual.GetImage().Save(filename);
+                                    this.TestContext.AddResultFile(filename);
                                 }
                             }
                             else if (visual.IsTabularType)
                             {
-                                if (dataFilesFolder != null)
+                                using (TableData data = visual.GetTableData())
                                 {
-                                    string expectedDataPath = Path.Combine(dataFilesFolder, string.Format("{0}.txt", expectedFile));
-                                    if (File.Exists(expectedDataPath))
+                                    string path = ResultFilePath(page.Title + "-" + visual.Title + ".txt");
+                                    data.SaveToFile(path);
+                                    this.TestContext.AddResultFile(path);
+
+                                    if (dataFilesFolder != null)
                                     {
-                                        using (TableData data = visual.GetTableData())
-                                        using (TableData expectedData = new TableDataFromDelimitedFile(expectedDataPath))
+                                        string expectedDataPath = Path.Combine(dataFilesFolder, string.Format("{0}.txt", expectedFile));
+                                        if (File.Exists(expectedDataPath))
                                         {
-                                            TestContext.WriteLine(string.Format("Tabular data, {0} columns", data.Columns.Length));
-                                            checks.CheckErrors(() => Assert.IsTrue(CompareUtilities.AreEqual(expectedData, data), "Data for visual {0} on page {1} does not match expected data{2}", visual.Title, page.Title, instanceMessage));
-                                            string path = ResultFilePath(page.Title + "-" + visual.Title + ".txt");
-                                            data.SaveToFile(path);
-                                            this.TestContext.AddResultFile(path);
+                                            using (TableData expectedData = new TableDataFromDelimitedFile(expectedDataPath))
+                                            {
+                                                TestContext.WriteLine(string.Format("Tabular data, {0} columns", data.Columns.Length));
+                                                checks.CheckErrors(() => Assert.IsTrue(CompareUtilities.AreEqual(expectedData, data), "Data for visual {0} on page {1} does not match expected data{2}", visual.Title, page.Title, instanceMessage));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            TestContext.WriteLine("File {0} not found, so table comparison not performed{1}.", expectedFile, instanceMessage);
                                         }
                                     }
                                     else
                                     {
-                                        TestContext.WriteLine("File {0} not found, so table comparison not performed{1}.", expectedFile, instanceMessage);
+                                        TestContext.WriteLine("No datafiles folder specified, so table comparison not performed{0}.", instanceMessage);
                                     }
-                                }
-                                else
-                                {
-                                    TestContext.WriteLine("No datafiles folder specified, so table comparison not performed{0}.", instanceMessage);
                                 }
                             }
                         }
