@@ -11,16 +11,17 @@
     <Company>IQVIA</Company>
     <Authors>Pete Thompson</Authors>
     <Product>Selenium.Spotfire</Product>
-    <VersionPrefix>2.1.0</VersionPrefix>
+    <VersionPrefix>2.1.1</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageReleaseNotes>2.1.0 - Add TestAnalysisContents method
-    2.0.0 - Modify API for SetServerUrl and OpenSpotfireAnalysis to ease support of configuration in test context
-    1.1.0 - Support for capturing Chrome logs
-    1.0.0 - Initial public release</PackageReleaseNotes>
+    <PackageReleaseNotes>2.1.1 - Allow TestAnalysisContents when there are no image or data files present
+2.1.0 - Add TestAnalysisContents method
+2.0.0 - Modify API for SetServerUrl and OpenSpotfireAnalysis to ease support of configuration in test context
+1.1.0 - Support for capturing Chrome logs
+1.0.0 - Initial public release</PackageReleaseNotes>
     <NeutralLanguage />
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

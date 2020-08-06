@@ -224,11 +224,24 @@ namespace Selenium.Spotfire.MSTest
 
                             if (visual.IsTextType)
                             {
-                                string expectedDataPath = Path.Combine(dataFilesFolder, string.Format("{0}.txt", expectedFile));
-                                // Files are created on Windows system but might be used for tests run under Linux
-                                string expected = File.ReadAllText(expectedDataPath).Replace("\r\n", Environment.NewLine);
-                                checks.CheckErrors(() => Assert.AreEqual(expected, visual.Text, "Text for visual {0} on page {1} does not match expected{2}.", visual.Title, page.Title, instanceMessage));
-
+                                if (dataFilesFolder != null)
+                                {
+                                    string expectedDataPath = Path.Combine(dataFilesFolder, string.Format("{0}.txt", expectedFile));
+                                    if (File.Exists(expectedDataPath))
+                                    {
+                                        // Files are created on Windows system but might be used for tests run under Linux
+                                        string expected = File.ReadAllText(expectedDataPath).Replace("\r\n", Environment.NewLine);
+                                        checks.CheckErrors(() => Assert.AreEqual(expected, visual.Text, "Text for visual {0} on page {1} does not match expected{2}.", visual.Title, page.Title, instanceMessage));
+                                    }
+                                    else
+                                    {
+                                        TestContext.WriteLine("File {0} not found, so text comparison not performed{1}.", expectedFile, instanceMessage);
+                                    }
+                                }
+                                else
+                                {
+                                    TestContext.WriteLine("No datafiles folder specified, so text comparison not performed{0}.", instanceMessage);
+                                }
                                 string path = ResultFilePath(page.Title + "-" + visual.Title + ".txt");
                                 File.WriteAllText(path,visual.Text);
                                 this.TestContext.AddResultFile(path);
@@ -237,37 +250,58 @@ namespace Selenium.Spotfire.MSTest
                             {
                                 TestContext.WriteLine(string.Format("Image visual, content size: ({0},{1})", visual.Content.Size.Width, visual.Content.Size.Height));
 
-                                Dictionary<string, Bitmap> imageComparisons = new Dictionary<string, Bitmap>();
-
-                                bool anyMatch = VisualCompare.CompareVisualImages(visual, 
-                                                                                  imagesFolder,
-                                                                                  expectedFile,
-                                                                                  imageComparisons);
-
-                                // If there's no match we need to write out the mismatches
-                                if (!anyMatch)
+                                if (imagesFolder != null)
                                 {
-                                    TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
-                                    foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
+                                    Dictionary<string, Bitmap> imageComparisons = new Dictionary<string, Bitmap>();
+
+                                    bool anyMatch = VisualCompare.CompareVisualImages(visual, 
+                                                                                    imagesFolder,
+                                                                                    expectedFile,
+                                                                                    imageComparisons);
+
+                                    // If there's no match we need to write out the mismatches
+                                    if (!anyMatch)
                                     {
-                                        string filename = ResultFilePath(page.Title + "-" + visual.Title + imageToSave.Key);
-                                        imageToSave.Value.Save(filename);
-                                        this.TestContext.AddResultFile(filename);
+                                        TestContext.WriteLine("Images didn't match, check the test results folder for the new image along with images showing comparison with existing possibilities.");
+                                        foreach(KeyValuePair<string, Bitmap> imageToSave in imageComparisons)
+                                        {
+                                            string filename = ResultFilePath(page.Title + "-" + visual.Title + imageToSave.Key);
+                                            imageToSave.Value.Save(filename);
+                                            this.TestContext.AddResultFile(filename);
+                                        }
                                     }
+                                    checks.CheckErrors(() => Assert.IsTrue(anyMatch, "Image for visual {0} on page {1} does not match a possible expected image{2}", visual.Title, page.Title, instanceMessage));
                                 }
-                                checks.CheckErrors(() => Assert.IsTrue(anyMatch, "Image for visual {0} on page {1} does not match a possible expected image{2}", visual.Title, page.Title, instanceMessage));
+                                else
+                                {
+                                    TestContext.WriteLine("No image files folder specified, so image comparison not performed{0}.", instanceMessage);
+                                }
                             }
                             else if (visual.IsTabularType)
                             {
-                                string expectedDataPath = Path.Combine(dataFilesFolder, string.Format("{0}.txt", expectedFile));
-                                using (TableData data = visual.GetTableData())
-                                using (TableData expectedData = new TableDataFromDelimitedFile(expectedDataPath))
+                                if (dataFilesFolder != null)
                                 {
-                                    TestContext.WriteLine(string.Format("Tabular data, {0} columns", data.Columns.Length));
-                                    checks.CheckErrors(() => Assert.IsTrue(CompareUtilities.AreEqual(expectedData, data), "Data for visual {0} on page {1} does not match expected data{2}", visual.Title, page.Title, instanceMessage));
-                                    string path = ResultFilePath(page.Title + "-" + visual.Title + ".txt");
-                                    data.SaveToFile(path);
-                                    this.TestContext.AddResultFile(path);
+                                    string expectedDataPath = Path.Combine(dataFilesFolder, string.Format("{0}.txt", expectedFile));
+                                    if (File.Exists(expectedDataPath))
+                                    {
+                                        using (TableData data = visual.GetTableData())
+                                        using (TableData expectedData = new TableDataFromDelimitedFile(expectedDataPath))
+                                        {
+                                            TestContext.WriteLine(string.Format("Tabular data, {0} columns", data.Columns.Length));
+                                            checks.CheckErrors(() => Assert.IsTrue(CompareUtilities.AreEqual(expectedData, data), "Data for visual {0} on page {1} does not match expected data{2}", visual.Title, page.Title, instanceMessage));
+                                            string path = ResultFilePath(page.Title + "-" + visual.Title + ".txt");
+                                            data.SaveToFile(path);
+                                            this.TestContext.AddResultFile(path);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        TestContext.WriteLine("File {0} not found, so table comparison not performed{1}.", expectedFile, instanceMessage);
+                                    }
+                                }
+                                else
+                                {
+                                    TestContext.WriteLine("No datafiles folder specified, so table comparison not performed{0}.", instanceMessage);
                                 }
                             }
                         }
