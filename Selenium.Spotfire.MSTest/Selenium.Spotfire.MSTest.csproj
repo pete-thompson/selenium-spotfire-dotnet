@@ -22,7 +22,7 @@
 1.1.0 - Support for capturing Chrome logs
 1.0.0 - Initial public release</PackageReleaseNotes>
     <NeutralLanguage />
-    <Version>2.1.1</Version>
+    <Version>2.2.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
