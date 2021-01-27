@@ -46,7 +46,7 @@ publish:
   stage: publish
   when: manual
   tags: 
-    - spotfire-server
+    - spotfire-dev-management
   dependencies:
     - build
   script:
