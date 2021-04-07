@@ -8,11 +8,12 @@
     <NeutralLanguage></NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Selenium Spotfire</PackageTags>
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageReleaseNotes>2.0.0 - Modify API for SetServerUrl and OpenSpotfireAnalysis to ease support of configuration in test context
+    <PackageReleaseNotes>2.1.0 - Add support for Spotfire 10.10
+    2.0.0 - Modify API for SetServerUrl and OpenSpotfireAnalysis to ease support of configuration in test context
     1.1.0 - Add support for running inside Docker containers
     1.0.0 - initial public release
 </PackageReleaseNotes>
@@ -21,7 +22,7 @@
     <Copyright>Copyright © IQVIA 2020</Copyright>
     <SignAssembly>false</SignAssembly>
     <Authors>Pete Thompson</Authors>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

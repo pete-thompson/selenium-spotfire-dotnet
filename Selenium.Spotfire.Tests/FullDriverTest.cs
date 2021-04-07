@@ -486,7 +486,9 @@ namespace Selenium.Spotfire.Tests
             {
                 IReadOnlyDictionary<string, string> answer = spotfire.GetLocalization();
                 checks.CheckErrors(() => Assert.AreNotEqual(0, answer.Count, "We expect some localization values"));
-                checks.CheckErrors(() => Assert.IsTrue(answer.ContainsKey("Ready"), "We expect a 'Ready' value in localization"));
+                if (!spotfire.IsSpotfire1010OrAbove()) {
+                    checks.CheckErrors(() => Assert.IsTrue(answer.ContainsKey("Ready"), "We expect a 'Ready' value in localization"));
+                }
             }
             checks.AssertEmpty();
         }

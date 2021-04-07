@@ -63,6 +63,10 @@ namespace Selenium.Spotfire
         /// Cache whether a server is Spotfire 10.3 or not
         /// </summary>
         private static Dictionary<string, bool> IsSpotfire103Cache = new Dictionary<string, bool>();
+        /// <summary>
+        /// Cache whether a server is Spotfire 10.10 or not
+        /// </summary>
+        private static Dictionary<string, bool> IsSpotfire1010Cache = new Dictionary<string, bool>();
 
         private string TemporaryChromeExtensionsFolder;
         private string ChromeLog;
@@ -408,16 +412,19 @@ namespace Selenium.Spotfire
         /// <returns></returns>
         public bool IsSpotfireReady()
         {
-            bool answer;
+            bool answer=true;
 
             // First check if the 'Ready' indicator is present
-            if (IsSpotfire10OrAbove())
+            if (!IsSpotfire1010OrAbove())
             {
-                answer = FindElements(By.CssSelector(string.Format("div[class*='sfx_top-bar'] div[title='{0}']", Localization["Ready"]))).Count > 0;
-            }
-            else
-            {
-                answer = FindElements(By.CssSelector(string.Format(".sf-element-status-bar div[title='{0} ']", Localization["Ready"]))).Count > 0;
+                if (IsSpotfire10OrAbove())
+                {
+                    answer = FindElements(By.CssSelector(string.Format("div[class*='sfx_top-bar'] div[title='{0}']", Localization["Ready"]))).Count > 0;
+                }
+                else
+                {
+                    answer = FindElements(By.CssSelector(string.Format(".sf-element-status-bar div[title='{0} ']", Localization["Ready"]))).Count > 0;
+                }
             }
 
             // Now check if any visualisations are busy (e.g. loading images)
@@ -497,6 +504,33 @@ namespace Selenium.Spotfire
                 if (ServerURL.Length > 0)
                 {
                     IsSpotfire103Cache.Add(ServerURL, answer);
+                }
+            }
+
+            return answer;
+        }
+
+        /// <summary>
+        /// Check for Spotfire 10.10
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSpotfire1010OrAbove()
+        {
+            bool answer;
+
+            if (ServerURL.Length > 0 && IsSpotfire1010Cache.ContainsKey(ServerURL))
+            {
+                answer = IsSpotfire1010Cache[ServerURL];
+            }
+            else
+            {
+                string readyTextExists = (((IJavaScriptExecutor)this).ExecuteScript("return Spotfire.Localization.resources.Ready?'yes':'no'")).ToString();
+
+                answer = readyTextExists == "no";
+
+                if (ServerURL.Length > 0)
+                {
+                    IsSpotfire1010Cache.Add(ServerURL, answer);
                 }
             }
 
