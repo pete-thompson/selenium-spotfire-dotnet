@@ -239,7 +239,12 @@ namespace Selenium.Spotfire
                     // Keep moving to next one until the element reappears in the DOM
                     while (!IsElementInDom())
                     {
-                        IWebElement nextButton = Driver.FindElement("The next visual button", By.CssSelector(".sfc-maximized-visual-button[title='Next']"));
+                        string cssClassForNext = "sfc-maximized-visual-button";
+                        if (Driver.IsSpotfire1010OrAbove()) 
+                        {
+                            cssClassForNext = "sf-element-maximized-visual-button";
+                        }
+                        IWebElement nextButton = Driver.FindElement("The next visual button", By.CssSelector("." + cssClassForNext + "[title='" + Driver.GetLocalization()["Next"] + "']"));
                         new Actions(Driver).MoveToElement(nextButton).Perform();
                         nextButton.Click();
                         Driver.WaitUntilSpotfireReady();
