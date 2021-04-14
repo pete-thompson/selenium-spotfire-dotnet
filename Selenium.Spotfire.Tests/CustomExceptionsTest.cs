@@ -42,5 +42,17 @@ namespace Selenium.Spotfire.Tests
             Assert.AreEqual("test2", ex3.Message);
             Assert.AreEqual(ex2, ex3.InnerException);
         }
+
+        [TestMethod]
+        public void TestNoServerURLException()
+        {
+            NoServerURLException ex1 = new NoServerURLException();
+            NoServerURLException ex2 = new NoServerURLException("test");
+            NoServerURLException ex3 = new NoServerURLException("test2", ex2);
+            Assert.AreEqual("Exception of type 'Selenium.Spotfire.NoServerURLException' was thrown.", ex1.Message);
+            Assert.AreEqual("test", ex2.Message);
+            Assert.AreEqual("test2", ex3.Message);
+            Assert.AreEqual(ex2, ex3.InnerException);
+        }
     }
 }

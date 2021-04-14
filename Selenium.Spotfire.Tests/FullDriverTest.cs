@@ -71,6 +71,29 @@ namespace Selenium.Spotfire.Tests
                 }
             }
         }
+        
+        [TestMethod]
+        public void TestNoServerURL() 
+        {
+            MultipleAsserts checks = new MultipleAsserts();
+
+            using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(TestContext))
+            {
+                try
+                {
+                    spotfire.OpenSpotfireAnalysis("Dummy path");
+                    checks.CheckErrors(() => Assert.Fail("We expected to fail because no Spotfire server URL was provided."));
+                }
+                catch (NoServerURLException)
+                {
+                    // all good
+                }
+
+            }
+
+            checks.AssertEmpty();
+        }
+
 
         [TestMethod]
         public void DataTests()

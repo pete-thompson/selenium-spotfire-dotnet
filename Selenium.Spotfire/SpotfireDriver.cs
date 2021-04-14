@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
@@ -360,6 +360,12 @@ namespace Selenium.Spotfire
         /// <param name="timeoutInSeconds">How long to wait before throwing a timeout error</param>
         public void OpenSpotfireAnalysis(string filePath, string configurationBlock = "", bool waitForCompletion = true, int timeoutInSeconds = 120)
         {
+            if (ServerURL == "") 
+            {
+                OutputStatusMessage(string.Format("No server URL provided when attempting to open report. Path {0}. Configuration Block: {1}", filePath, configurationBlock));
+                throw new NoServerURLException();
+            }
+
             OutputStatusMessage(String.Format("Opening Spotfire analysis from server {0}. Path {1}. Configuration Block: {2}", ServerURL, filePath, configurationBlock));
 
             EnsureWrapperLoaded();
