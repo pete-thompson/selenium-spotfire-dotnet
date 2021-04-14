@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <TargetFramework>net5.0</TargetFramework>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>1.1.0 - Add VisualCompare class
-    1.0.0 - Initial public release</PackageReleaseNotes>
+    <PackageReleaseNotes>2.0.0 - Update to DotNet 5.0
+1.1.0 - Add VisualCompare class
+1.0.0 - Initial public release</PackageReleaseNotes>
     <Description>Helpers for all types of tests using Spotfire and Selenium, part of the Spotfire.Selenium project.</Description>
     <Company>IQVIA</Company>
     <Product>Selenium.Spotfire</Product>
@@ -15,7 +16,7 @@
     <Authors>Pete Thompson</Authors>
     <PackageTags>Selenium Spotfire</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

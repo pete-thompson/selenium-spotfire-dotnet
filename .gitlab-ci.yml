@@ -1,4 +1,4 @@
-image: petethompson1968/selenium-spotfire-dotnet:2.1
+image: petethompson1968/selenium-spotfire-dotnet:5.0
 
 stages:
   - build
