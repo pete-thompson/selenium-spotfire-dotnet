@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
@@ -224,6 +224,7 @@ namespace Selenium.Spotfire
                 chromeOptions.AddArgument("--enable-logging");
                 chromeOptions.AddArgument("--log-file=" + chromeLog);
                 chromeOptions.AddArgument("--log-level=0");
+                chromeOptions.AddArgument("--v=1");
             }
  
             string temporaryChromeExtensionsFolder = Path.Combine(Path.GetTempPath(), "SpotfireDriverChrome", Path.GetRandomFileName());
