@@ -75,7 +75,8 @@ namespace Selenium.Spotfire.Tests
             {
                 // Do nothing
             }
-            Assert.AreEqual(0, context.Lines.Count);
+            // There will be one line of output because of the screen capture
+            Assert.AreEqual(1, context.Lines.Count);
         }
 
         [TestMethod]
