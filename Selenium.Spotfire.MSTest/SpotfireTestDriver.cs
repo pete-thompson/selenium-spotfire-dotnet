@@ -150,6 +150,7 @@ namespace Selenium.Spotfire.MSTest
             string path = ResultFilePath(ScreenshotCounter.ToString("00000") + "-" + stepName + ".png");
             ss.SaveAsFile(path);
             this.TestContext.AddResultFile(path);
+            OutputStatusMessage(string.Format("Screenshot captured to {0}", path));
             ScreenshotCounter++;
         }
 

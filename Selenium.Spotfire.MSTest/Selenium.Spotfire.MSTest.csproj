@@ -11,11 +11,12 @@
     <Company>IQVIA</Company>
     <Authors>Pete Thompson</Authors>
     <Product>Selenium.Spotfire</Product>
-    <VersionPrefix>3.0.0</VersionPrefix>
+    <VersionPrefix>3.0.1</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageReleaseNotes>3.0.0 - Update to DotNet 5.0
+    <PackageReleaseNotes>3.0.1 - Write message to the logs when we capture a screenshot - makes it easier to match files to test cases
+3.0.0 - Update to DotNet 5.0
 2.3.0 - Support for Spotfire 10.10
 2.2.0 - Remove the maximize test in TestAnalysisContents, create files when there are no comparisons
 2.1.1 - Allow TestAnalysisContents when there are no image or data files present
@@ -24,7 +25,7 @@
 1.1.0 - Support for capturing Chrome logs
 1.0.0 - Initial public release</PackageReleaseNotes>
     <NeutralLanguage />
-    <Version>3.0.0</Version>
+    <Version>3.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
