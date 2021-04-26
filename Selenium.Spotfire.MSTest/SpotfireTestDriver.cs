@@ -160,7 +160,10 @@ namespace Selenium.Spotfire.MSTest
         /// <param name="message"></param>
         public override void OutputStatusMessage(string message)
         {
-            TestContext.WriteLine(message);
+            if (!MessagesSuppressed)
+            {
+                TestContext.WriteLine(message);
+            }
             base.OutputStatusMessage(message);
         }
 

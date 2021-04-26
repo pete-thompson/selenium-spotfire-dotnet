@@ -573,7 +573,18 @@ spotfire.CaptureScreenshot("First step");
 ### Logging to the Test Context
 
 All debug messages from the driver are automatically logged to the Test Context using WriteLine and will appear
-in the test results.
+in the test results. Sometimes you may wish to suppress messages (e.g. if you're retrieving lots of data and the
+logs are overwhelmed with debug messages). In this case you can call:
+
+```c#
+spotfire.SuppressMessages()
+```
+
+When you want messages to start appearing again simply call:
+
+```c#
+spotfire.UnsuppressMessages()
+```
 
 ### All-inclusive analysis file test
 

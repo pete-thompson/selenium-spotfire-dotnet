@@ -74,9 +74,8 @@ namespace Selenium.Spotfire.Tests
             using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(context))
             {
                 // Do nothing
+                Assert.AreEqual(0, context.Lines.Count);
             }
-            // There will be one line of output because of the screen capture
-            Assert.AreEqual(1, context.Lines.Count);
         }
 
         [TestMethod]
@@ -89,6 +88,21 @@ namespace Selenium.Spotfire.Tests
                 spotfire.OpenSpotfireAnalysis(TestFile);
             }
             Assert.AreNotEqual(0, context.Lines.Count);
+        }
+
+        [TestMethod]
+        public void CheckSuppressMessages()
+        {
+            TestingTestContext context = new TestingTestContext(TestContext);
+            using (SpotfireTestDriver spotfire = SpotfireTestDriver.GetDriverForSpotfire(context))
+            {
+                spotfire.SuppressMessages();
+                spotfire.OutputStatusMessage("test");
+                Assert.AreEqual(0, context.Lines.Count);
+                spotfire.UnsuppressMessages();
+                spotfire.OutputStatusMessage("test");
+                Assert.AreEqual(1, context.Lines.Count);
+            }
         }
     }
 }

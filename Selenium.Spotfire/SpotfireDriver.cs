@@ -38,6 +38,11 @@ namespace Selenium.Spotfire
         public bool OutputToConsole { get; set; }
 
         /// <summary>
+        /// Flag to indicate if messages are suppressed (any drivers that inherit and change the message implementation should check this flag)
+        /// </summary>
+        protected bool MessagesSuppressed = false;
+
+        /// <summary>
         ///  The chrome service - allows us to send configuration commands
         /// </summary>
         private ChromeDriverService DriverService;
@@ -1188,7 +1193,7 @@ namespace Selenium.Spotfire
         )]
         public virtual void OutputStatusMessage(string message)
         {
-            if (OutputToConsole)
+            if (OutputToConsole && !MessagesSuppressed)
             {
                 Console.WriteLine(message);
             }
@@ -1202,6 +1207,20 @@ namespace Selenium.Spotfire
         public void OutputStatusMessage(string message, params object[] parameters)
         {
             OutputStatusMessage(string.Format(message, parameters));
+        }
+
+        /// <summary>
+        /// Suppress any logging of messages
+        /// </summary>
+        public void SuppressMessages() {
+            MessagesSuppressed = true;
+        }
+
+        /// <summary>
+        /// Allow logging of messages
+        /// </summary>
+        public void UnsuppressMessages() {
+            MessagesSuppressed = false;
         }
     }
 }
