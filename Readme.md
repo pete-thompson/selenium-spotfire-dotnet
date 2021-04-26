@@ -828,6 +828,13 @@ GetMarking | API
 [^1]: Spotfire will not return data for certain types of columns but doesn't provide an API to check if 
 the column type is supported, thus there is a slight 'smelliness' to the implementation
 
+## Developing in VS Code
+
+The project includes various VS Code configuration files to help support development. The project is configured
+to use a Docker container for development, which allows execution of tests in a known environment. The project
+expects to be able to use an X Windows server running in the host machine - if you're developing on Windows
+be sure to start an X Windows server (e.g. VcXsrv) prior to running any tests. Also ensure that the X Windows
+server is configured to allow connections from the Docker container.
 
 ## Contributing
 

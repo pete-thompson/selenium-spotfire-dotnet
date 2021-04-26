@@ -4,18 +4,19 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Run tests",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Selenium.Spotfire.Tests/bin/Debug/netcoreapp2.1/Selenium.Spotfire.Tests.dll",
-            "args": [],
+            "program": "dotnet",
+            "args": ["test", "--no-build", "--settings:${workspaceFolder}/insideDocker.runSettings"],
             "cwd": "${workspaceFolder}/Selenium.Spotfire.Tests",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": true
         },
         {
             "name": ".NET Core Attach",

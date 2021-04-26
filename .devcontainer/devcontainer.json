@@ -1,0 +1,16 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.166.1/containers/dotnet
+{
+	"image": "petethompson1968/selenium-spotfire-dotnet:5.0",
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-dotnettools.csharp"
+	],
+	// Configure Xfvb so that tests can run without external X server
+	"containerEnv": {
+		"DISPLAY": "host.docker.internal:0.0",
+		"images_folder": "${containerWorkspaceFolder}/test-resources/images",
+        "datafiles_folder": "${containerWorkspaceFolder}/test-resources/datafiles"
+	}
+}
